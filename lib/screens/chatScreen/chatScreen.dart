@@ -337,7 +337,7 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
         // MODIFIED
         children: [
           // NEW
-          Flexible(
+          Expanded(
             // NEW
             child: ListView.builder(
               // NEW
@@ -347,7 +347,6 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
               itemCount: _messages.length, // NEW
             ), // NEW
           ), // NEW
-
           Container(
             child: _buildTextComposer(), // MODIFIED
           ), // NEW
