@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -160,7 +162,191 @@ Widget message(String urlImage, String title, String onOff, context) {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Icon(Icons.call),
         ),
-        Icon(Icons.more_vert),
+        PopupMenuButton(
+          padding: EdgeInsets.zero,
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              height: 0,
+              padding: EdgeInsets.zero,
+              value: 0,
+              child: ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.volume_up_outlined,
+                      color: Colors.grey,
+                      //size: 30,
+                    ),
+                  ],
+                ),
+                title: Transform.translate(
+                  offset: Offset(-16, 0),
+                  child: Text(
+                    "Senyap",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  size: 20,
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              height: 0,
+              padding: EdgeInsets.zero,
+              child: Divider(
+                thickness: 7,
+                color: Color.fromARGB(255, 186, 183, 183).withOpacity(0.1),
+              ),
+            ),
+            PopupMenuItem(
+              height: 0,
+              padding: EdgeInsets.zero,
+              value: 1,
+              child: ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.videocam_outlined,
+                      color: Colors.grey,
+                      //size: 30,
+                    ),
+                  ],
+                ),
+                title: Transform.translate(
+                  offset: Offset(-16, 0),
+                  child: Text(
+                    "Panggilan Video",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              height: 0,
+              padding: EdgeInsets.zero,
+              value: 1,
+              child: ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.search_outlined,
+                      color: Colors.grey,
+                      //size: 30,
+                    ),
+                  ],
+                ),
+                title: Transform.translate(
+                  offset: Offset(-16, 0),
+                  child: Text(
+                    "Cari",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              height: 0,
+              padding: EdgeInsets.zero,
+              value: 1,
+              child: ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.brush_outlined,
+                      color: Colors.grey,
+                      //size: 30,
+                    ),
+                  ],
+                ),
+                title: Transform.translate(
+                  offset: Offset(-16, 0),
+                  child: Text(
+                    "Bersihkan Riwayat",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              height: 0,
+              padding: EdgeInsets.zero,
+              value: 1,
+              child: ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.colorize_outlined,
+                      color: Colors.grey,
+                      //size: 30,
+                    ),
+                  ],
+                ),
+                title: Transform.translate(
+                  offset: Offset(-16, 0),
+                  child: Text(
+                    "Ganti Warna",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              height: 0,
+              padding: EdgeInsets.zero,
+              value: 1,
+              child: ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.delete_outline_outlined,
+                      color: Colors.grey,
+                      //size: 30,
+                    ),
+                  ],
+                ),
+                title: Transform.translate(
+                  offset: Offset(-16, 0),
+                  child: Text(
+                    "Hapus Obrolan",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
     ),
     body: const ChatScr(),
@@ -217,17 +403,14 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     _textController.clear();
 
     var message = ChatMess(
-      // NEW
-      text: text, // NEW
+      text: text,
       animationController: AnimationController(
-        // NEW
-        duration: const Duration(milliseconds: 700), // NEW
-        vsync: this, // NEW
-      ), // NEW
-    ); // NEW
+        duration: const Duration(milliseconds: 300),
+        vsync: this,
+      ),
+    );
     setState(() {
-      // NEW
-      _messages.insert(0, message); // NEW
+      _messages.insert(0, message);
     });
     _focusNode.requestFocus();
     message.animationController.forward();
@@ -237,9 +420,9 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     bool sendMic = false;
 
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-      ),
+      // margin: const EdgeInsets.symmetric(
+      //   horizontal: 8.0,
+      // ),
       child: Row(
         children: [
           Flexible(
@@ -256,7 +439,7 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.7),
+                    // borderRadius: BorderRadius.circular(25.7),
                     borderSide: const BorderSide(
                       width: 0,
                       style: BorderStyle.none,
@@ -268,56 +451,43 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
                     Icons.emoji_emotions_outlined,
                     color: Colors.grey,
                   ),
-                  hintText: 'Message',
+                  hintText: 'Pesan',
                   hintStyle: const TextStyle(fontSize: 20, color: Colors.grey),
                   suffixIconConstraints:
                       const BoxConstraints(minWidth: 80, maxWidth: 100),
-                  suffixIcon: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(
-                        Icons.attach_file_outlined,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Icon(
-                        Icons.camera_alt,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
+                  suffixIcon: _textController.text == ''
+                      ? Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.attach_file_outlined,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.mic,
+                              ),
+                              onPressed: () => // MODIFIED
+                                  _handleSubmitted(
+                                      _textController.text) // MODIFIED
+                              ,
+                            ),
+                          ],
+                        )
+                      : IconButton(
+                          icon: Icon(
+                            Icons.send,
+                            color: Colors.blue,
+                          ),
+                          onPressed: () => // MODIFIED
+                              _handleSubmitted(_textController.text) // MODIFIED
+                          ,
+                        ),
                 ),
                 focusNode: _focusNode,
-              ),
-            ),
-          ),
-          IconTheme(
-            data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
-            child: Container(
-              height: 65,
-              width: 65,
-              child: IconButton(
-                icon: _textController.text == ''
-                    ? const CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.teal,
-                        child: Icon(
-                          Icons.mic,
-                          color: Colors.white,
-                        ))
-                    : const CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.teal,
-                        child: Icon(
-                          Icons.send,
-                          color: Colors.white,
-                        ),
-                      ),
-                onPressed: () => // MODIFIED
-                    _handleSubmitted(_textController.text) // MODIFIED
-                ,
               ),
             ),
           ),
@@ -328,14 +498,59 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
     return Container(
-      constraints: const BoxConstraints.expand(),
+      constraints: BoxConstraints.expand(),
       decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/chatBack.jpg"), fit: BoxFit.cover)),
+        image: DecorationImage(
+          image: AssetImage("assets/chat_bg.jpg"),
+          fit: BoxFit.cover,
+          colorFilter: ColorFilter.linearToSrgbGamma(),
+        ),
+      ),
       child: Column(
         // MODIFIED
         children: [
+          _messages.isEmpty
+              ? Container(
+                  margin: EdgeInsets.only(top: height * 0.24),
+                  width: width * 0.65,
+                  height: width * 0.5,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.34),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: width * 0.05,
+                      ),
+                      Text(
+                        "Belum ada pesan di sini...",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: width * 0.07,
+                      ),
+                      Text(
+                        "Kirim pesan dan tekan sambutan di \nbawah.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: width * 0.01,
+                      ),
+                      SizedBox(
+                        child: Image.asset("assets/hi.gif"),
+                        height: width * 0.2,
+                      ),
+                    ],
+                  ),
+                )
+              : Text(""),
           // NEW
           Flexible(
             // NEW
@@ -343,7 +558,12 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
               // NEW
               padding: const EdgeInsets.all(8.0), // NEW
               reverse: true, // NEW
-              itemBuilder: (_, index) => _messages[index], // NEW
+              itemBuilder: (_, index) => Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  _messages[index],
+                ],
+              ), // NEW
               itemCount: _messages.length, // NEW
             ), // NEW
           ), // NEW
