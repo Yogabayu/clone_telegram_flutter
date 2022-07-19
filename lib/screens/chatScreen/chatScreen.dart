@@ -1,5 +1,5 @@
 // ignore_for_file: unused_local_variable
-
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -363,17 +363,54 @@ class ChatMess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var dt = DateTime.now();
     return SizeTransition(
       sizeFactor:
           CurvedAnimation(parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
-            color: const Color(0xffdcf8c6),
-            borderRadius: BorderRadius.circular(4.0)),
+          color: Color.fromARGB(255, 205, 243, 176),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            bottomLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+          ),
+        ),
         margin: const EdgeInsets.symmetric(vertical: 2.0),
-        child: Text(text),
+        child: Row(
+          children: [
+            Text(
+              text,
+              style: TextStyle(fontSize: 17),
+            ),
+            SizedBox(
+              width: 7,
+            ),
+            Column(
+              children: [
+                Text(""),
+                Row(
+                  children: [
+                    Text(
+                      dt.hour.toString() + ":" + dt.minute.toString(),
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                    SizedBox(
+                      width: 7,
+                    ),
+                    Icon(
+                      Icons.done,
+                      size: 15,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
