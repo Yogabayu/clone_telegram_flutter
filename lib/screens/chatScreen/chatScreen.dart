@@ -1,4 +1,5 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, unused_import
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
@@ -16,12 +17,26 @@ class _ChatScreenState extends State<ChatScreen> {
       child: ListView(
         children: [
           contact(
+            'https://picsum.photos/seed/mu/200/300',
+            'Pinos',
+            '19:30',
+            'online',
+            'Mabar kuy',
+            context,
+            true,
+            "20",
+            true,
+          ),
+          contact(
             'https://picsum.photos/seed/kid/200/300',
             'Joni',
             '19:30',
             'terlihat 32 Feb pada 01.05',
             'Mabar kuy',
             context,
+            true,
+            "20",
+            false,
           ),
           contact(
             'https://picsum.photos/seed/man/200/300',
@@ -30,6 +45,9 @@ class _ChatScreenState extends State<ChatScreen> {
             'online',
             'Minta qwe',
             context,
+            false,
+            "1",
+            false,
           ),
           contact(
             'https://picsum.photos/seed/girl/200/300',
@@ -38,6 +56,9 @@ class _ChatScreenState extends State<ChatScreen> {
             'online',
             'Anjay mabar',
             context,
+            false,
+            "",
+            false,
           ),
         ],
       ),
@@ -75,42 +96,104 @@ Route _createRoute(
   );
 }
 
-Widget contact(
-    String urlImage, String title, var time, onOff, String msgs, context) {
+Widget contact(String urlImage, String title, var time, onOff, String msgs,
+    context, bool isOnline, String unRead, bool isPinned) {
   return Padding(
-    padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
-    child: ListTile(
-      onTap: () {
-        Navigator.of(context)
-            .push(_createRoute(urlImage, title, time, onOff, msgs, context));
-      },
-      leading: Container(
-        height: 50,
-        width: 50,
-        child: ClipOval(
-          child: Image.network(
-            urlImage,
-            fit: BoxFit.fill,
+    padding: const EdgeInsets.fromLTRB(0, 2.0, 0, 4.0),
+    child: Column(
+      children: [
+        ListTile(
+          onTap: () {
+            Navigator.of(context).push(
+                _createRoute(urlImage, title, time, onOff, msgs, context));
+          },
+          leading: Stack(
+            children: [
+              Container(
+                height: 50,
+                width: 50,
+                child: ClipOval(
+                  child: Image.network(
+                    urlImage,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              isOnline
+                  ? Positioned(
+                      top: 35,
+                      left: 38,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        width: 12,
+                        height: 12,
+                      ),
+                    )
+                  : Text(""),
+            ],
+          ),
+          title: Text(title),
+          subtitle: Row(
+            children: [
+              const SizedBox(
+                width: 4.0,
+              ),
+              Text(
+                msgs,
+              ),
+            ],
+          ),
+          trailing: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                time,
+                style: TextStyle(color: Colors.grey),
+              ),
+              unRead.isNotEmpty && isPinned
+                  ? Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      width: 25,
+                      height: 25,
+                      child: Center(
+                        child: FaIcon(
+                          FontAwesomeIcons.syringe,
+                          size: 13,
+                        ),
+                      ),
+                    )
+                  : unRead.isNotEmpty
+                      ? Container(
+                          decoration: BoxDecoration(
+                            color: isOnline ? Colors.green : Colors.grey,
+                            borderRadius: BorderRadius.circular(13),
+                          ),
+                          width: 25,
+                          height: 25,
+                          child: Center(
+                            child: Text(
+                              unRead,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Text(""),
+            ],
           ),
         ),
-      ),
-      title: Text(title),
-      subtitle: Row(
-        children: [
-          const Icon(
-            Icons.done_all,
-            size: 20,
-            color: Colors.blue,
-          ),
-          const SizedBox(
-            width: 4.0,
-          ),
-          Text(
-            msgs,
-          ),
-        ],
-      ),
-      trailing: Text(time),
+        Divider(
+          color: Colors.black.withOpacity(0.1),
+        ),
+      ],
     ),
   );
 }
