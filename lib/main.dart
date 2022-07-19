@@ -1,10 +1,18 @@
-import 'package:clone_telegram/provider/theme.dart';
+import 'package:clone_telegram/provider/scroll.dart';
 import 'package:clone_telegram/screens/SplashScreen/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Scroll()),
+        Provider(create: (context) => Scroll()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
