@@ -8,7 +8,6 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Scroll()),
-        Provider(create: (context) => Scroll()),
       ],
       child: const MyApp(),
     ),
