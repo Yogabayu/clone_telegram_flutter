@@ -2,6 +2,7 @@
 
 import 'package:clone_telegram/model/obrolan.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomSearch extends StatefulWidget {
   const CustomSearch({Key? key}) : super(key: key);
@@ -78,63 +79,42 @@ class _CustomSearchState extends State<CustomSearch> {
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   "Obrolan",
-                  // style: TextStyle(
-                  //   color: Colors.black,
-                  // ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   "Media",
-                  // style: TextStyle(
-                  //   color: Colors.black,
-                  // ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   "Unduhan",
-                  // style: TextStyle(
-                  //   color: Colors.black,
-                  // ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   "Tautan",
-                  // style: TextStyle(
-                  //   color: Colors.black,
-                  // ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   "Berkas",
-                  // style: TextStyle(
-                  //   color: Colors.black,
-                  // ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   "Musik",
-                  // style: TextStyle(
-                  //   color: Colors.black,
-                  // ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   "Suara",
-                  // style: TextStyle(
-                  //   color: Colors.black,
-                  // ),
                 ),
               ),
             ],
@@ -183,11 +163,10 @@ Widget obrolan(context) {
             itemCount: dummyObrolan.length,
             itemBuilder: (context, index) {
               final nama = dummyObrolan[index];
-              // return Text(nama.title);
               return Container(
                 margin: EdgeInsets.symmetric(vertical: 7, horizontal: 5),
-                height: 70,
-                width: 70,
+                height: width * 0.1,
+                width: width * 0.16,
                 child: Column(
                   children: [
                     Container(
@@ -211,10 +190,119 @@ Widget obrolan(context) {
           ),
         ),
         Container(
+          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           width: width,
-          height: 25,
+          height: width * 0.06,
           color: Colors.grey.withOpacity(0.15),
-        )
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Terkini",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              Text(
+                "Hapus Semua",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+        _terkini(
+          'https://picsum.photos/seed/girl/200/300',
+          "Pinos",
+          "terlihat sebulan yang lalu",
+          false,
+          "",
+          false,
+        ),
+        _terkini(
+          'https://picsum.photos/seed/news/200/300',
+          "Bot Berita",
+          "bot",
+          true,
+          "12",
+          false,
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _terkini(
+  urlImage,
+  title,
+  terlihat,
+  bool isOnline,
+  String unRead,
+  bool isPinned,
+) {
+  return ListTile(
+    onTap: () {},
+    leading: Container(
+      height: 50,
+      width: 50,
+      child: ClipOval(
+        child: Image.network(
+          urlImage,
+          fit: BoxFit.fill,
+        ),
+      ),
+    ),
+    title: Text(title),
+    subtitle: Row(
+      children: [
+        const SizedBox(
+          width: 4.0,
+        ),
+        Text(
+          terlihat,
+        ),
+      ],
+    ),
+    trailing: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Text(
+          "",
+        ),
+        unRead.isNotEmpty && isPinned
+            ? Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                width: 25,
+                height: 25,
+                child: Center(
+                  child: FaIcon(
+                    FontAwesomeIcons.syringe,
+                    size: 13,
+                  ),
+                ),
+              )
+            : unRead.isNotEmpty
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: isOnline ? Colors.green : Colors.grey,
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                    width: 25,
+                    height: 25,
+                    child: Center(
+                      child: Text(
+                        unRead,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
+                : Text(""),
       ],
     ),
   );

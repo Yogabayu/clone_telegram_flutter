@@ -1,4 +1,5 @@
 import 'package:animated_icon_button/animated_icon_button.dart';
+import 'package:clone_telegram/screens/pengaturan/pengaturan.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatefulWidget {
@@ -24,12 +25,13 @@ class _SideMenuState extends State<SideMenu> {
               width: selected ? width : width,
               height: selected ? height * 0.8 : height * 0.8,
               top: selected ? width * 0.25 : width * 0.45,
-              duration: const Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 300),
               curve: Curves.easeIn,
-              child: Column(
+              child: ListView(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.zero,
                     child: ListTile(
                       onTap: () {
                         print("Tambah akun");
@@ -68,27 +70,29 @@ class _SideMenuState extends State<SideMenu> {
                 ],
               ),
             ),
-            IgnorePointer(
-              child: ListView(
-                // Remove padding
-                padding: EdgeInsets.zero,
-                children: [
-                  UserAccountsDrawerHeader(
-                    accountName: Text('Yoga Bayu'),
-                    accountEmail: Text('+62 xxx xxxxxx'),
-                    currentAccountPicture: ClipOval(
-                      child: Image.network(
-                        'https://picsum.photos/seed/man/200/300',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 63, 120, 168),
+            // IgnorePointer(
+            //   child:
+            ListView(
+              // Remove padding
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              children: [
+                UserAccountsDrawerHeader(
+                  accountName: Text('Yoga Bayu'),
+                  accountEmail: Text('+62 xxx xxxxxx'),
+                  currentAccountPicture: ClipOval(
+                    child: Image.network(
+                      'https://picsum.photos/seed/man/200/300',
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ],
-              ),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 63, 120, 168),
+                  ),
+                ),
+              ],
             ),
+            // ),
             Positioned(
               right: width * 0.04,
               top: width * 0.1,
@@ -144,7 +148,14 @@ class _SideMenuState extends State<SideMenu> {
 Widget _menuSide(IconData icon, String textMenu, context) {
   return Container(
     child: ListTile(
-      onTap: () => print(textMenu),
+      onTap: () {
+        if (textMenu == 'Pengaturan') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Pengaturan()),
+          );
+        }
+      },
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
