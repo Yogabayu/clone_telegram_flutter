@@ -60,6 +60,28 @@ class _ChatScreenState extends State<ChatScreen> {
             "",
             false,
           ),
+          contact(
+            'https://picsum.photos/seed/man/200/300',
+            'Bendot',
+            '19:30',
+            'online',
+            'Minta qwe',
+            context,
+            false,
+            "1",
+            false,
+          ),
+          contact(
+            'https://picsum.photos/seed/girl/200/300',
+            'Kang Bakso',
+            '19:30',
+            'online',
+            'Anjay mabar',
+            context,
+            false,
+            "",
+            false,
+          ),
         ],
       ),
     );
@@ -98,103 +120,100 @@ Route _createRoute(
 
 Widget contact(String urlImage, String title, var time, onOff, String msgs,
     context, bool isOnline, String unRead, bool isPinned) {
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(0, 2.0, 0, 4.0),
-    child: Column(
-      children: [
-        ListTile(
-          onTap: () {
-            Navigator.of(context).push(
-                _createRoute(urlImage, title, time, onOff, msgs, context));
-          },
-          leading: Stack(
-            children: [
-              Container(
-                height: 50,
-                width: 50,
-                child: ClipOval(
-                  child: Image.network(
-                    urlImage,
-                    fit: BoxFit.fill,
-                  ),
+  return Column(
+    children: [
+      ListTile(
+        onTap: () {
+          Navigator.of(context)
+              .push(_createRoute(urlImage, title, time, onOff, msgs, context));
+        },
+        leading: Stack(
+          children: [
+            Container(
+              height: 50,
+              width: 50,
+              child: ClipOval(
+                child: Image.network(
+                  urlImage,
+                  fit: BoxFit.fill,
                 ),
               ),
-              isOnline
-                  ? Positioned(
-                      top: 35,
-                      left: 38,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 2),
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        width: 12,
-                        height: 12,
-                      ),
-                    )
-                  : Text(""),
-            ],
-          ),
-          title: Text(title),
-          subtitle: Row(
-            children: [
-              const SizedBox(
-                width: 4.0,
-              ),
-              Text(
-                msgs,
-              ),
-            ],
-          ),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                time,
-                style: TextStyle(color: Colors.grey),
-              ),
-              unRead.isNotEmpty && isPinned
-                  ? Container(
+            ),
+            isOnline
+                ? Positioned(
+                    top: 35,
+                    left: 38,
+                    child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.white, width: 2),
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(7),
                       ),
-                      width: 25,
-                      height: 25,
-                      child: Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.syringe,
-                          size: 13,
+                      width: 12,
+                      height: 12,
+                    ),
+                  )
+                : Text(""),
+          ],
+        ),
+        title: Text(title),
+        subtitle: Row(
+          children: [
+            const SizedBox(
+              width: 4.0,
+            ),
+            Text(
+              msgs,
+            ),
+          ],
+        ),
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              time,
+              style: TextStyle(color: Colors.grey),
+            ),
+            unRead.isNotEmpty && isPinned
+                ? Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    width: 25,
+                    height: 25,
+                    child: Center(
+                      child: FaIcon(
+                        FontAwesomeIcons.syringe,
+                        size: 13,
+                      ),
+                    ),
+                  )
+                : unRead.isNotEmpty
+                    ? Container(
+                        decoration: BoxDecoration(
+                          color: isOnline ? Colors.green : Colors.grey,
+                          borderRadius: BorderRadius.circular(13),
                         ),
-                      ),
-                    )
-                  : unRead.isNotEmpty
-                      ? Container(
-                          decoration: BoxDecoration(
-                            color: isOnline ? Colors.green : Colors.grey,
-                            borderRadius: BorderRadius.circular(13),
-                          ),
-                          width: 25,
-                          height: 25,
-                          child: Center(
-                            child: Text(
-                              unRead,
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
+                        width: 25,
+                        height: 25,
+                        child: Center(
+                          child: Text(
+                            unRead,
+                            style: TextStyle(
+                              color: Colors.white,
                             ),
                           ),
-                        )
-                      : Text(""),
-            ],
-          ),
+                        ),
+                      )
+                    : Text(""),
+          ],
         ),
-        Divider(
-          color: Colors.black.withOpacity(0.1),
-        ),
-      ],
-    ),
+      ),
+      Divider(
+        color: Colors.black.withOpacity(0.1),
+      ),
+    ],
   );
 }
 
@@ -588,7 +607,7 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
                             ),
                             IconButton(
                               icon: Icon(
-                                Icons.mic,
+                                Icons.mic_none_outlined,
                               ),
                               onPressed: () => // MODIFIED
                                   _handleSubmitted(
@@ -616,8 +635,13 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     );
   }
 
+// ↓ hold tap position, set during onTapDown, using getPosition() method
+  Offset? tapXY;
+  // ↓ hold screen size, using first line in build() method
+  RenderBox? overlay;
   @override
   Widget build(BuildContext context) {
+    overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox?;
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
     return Container(
@@ -641,13 +665,15 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
                     color: Colors.black.withOpacity(0.34),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Column(
+                  child: ListView(
+                    shrinkWrap: true,
                     children: [
                       SizedBox(
                         height: width * 0.05,
                       ),
                       Text(
                         "Belum ada pesan di sini...",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
@@ -681,7 +707,29 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
               itemBuilder: (_, index) => Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  _messages[index],
+                  GestureDetector(
+                    onTapDown: getPosition,
+                    onLongPress: () {
+                      //FIX pop up menu
+                      showMenu<String>(
+                        context: context,
+                        position: relRectSize,
+                        items: [
+                          PopupMenuItem<String>(
+                            child: Text('Delete'),
+                            onTap: () {
+                              setState(() {
+                                _messages.removeAt(index);
+                              });
+                            },
+                            value: '1',
+                          ),
+                        ],
+                        elevation: 8.0,
+                      );
+                    },
+                    child: _messages[index],
+                  ),
                 ],
               ), // NEW
               itemCount: _messages.length, // NEW
@@ -694,5 +742,13 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
         ], // NEW
       ),
     );
+  }
+
+  RelativeRect get relRectSize =>
+      RelativeRect.fromSize(tapXY! & const Size(40, 40), overlay!.size);
+
+  // ↓ get the tap position Offset
+  void getPosition(TapDownDetails detail) {
+    tapXY = detail.globalPosition;
   }
 }

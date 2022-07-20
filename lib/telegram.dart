@@ -60,10 +60,6 @@ class _TelegramState extends State<Telegram> {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(_createRoute());
-              // showSearch(
-              //   context: context,
-              //   delegate: MySearchDelegate(),
-              // );
             },
             icon: const Icon(Icons.search),
           ),
