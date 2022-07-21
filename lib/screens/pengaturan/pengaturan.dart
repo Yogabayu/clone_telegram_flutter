@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //TODO penbaturan blm selesai
 class Pengaturan extends StatefulWidget {
@@ -20,77 +21,10 @@ class _PengaturanState extends State<Pengaturan> {
             children: [
               Column(
                 children: [
-                  Container(
-                    color: Color.fromARGB(255, 126, 182, 228),
-                    height: width * 0.35,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              width: width * 0.5,
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.qr_code,
-                                color: Colors.white,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.search,
-                                color: Colors.white,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.more_vert_rounded,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        ListTile(
-                          onTap: () {},
-                          leading: CircleAvatar(
-                            radius: 27,
-                            backgroundImage: NetworkImage(
-                                'https://picsum.photos/seed/girl/200/300'),
-                          ),
-                          title: Text(
-                            "Y O G A",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Text(
-                            "online",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.white,
-                    height: height * 0.3,
-                  ),
-                  Text("data"),
+                  _header(context),
+                  _akun(context),
+                  Divider(color: Colors.transparent),
+                  _pengaturan(context),
                 ],
               ),
               Positioned(
@@ -151,4 +85,187 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: child,
     );
   }
+}
+
+Widget _akun(context) {
+  final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
+  return Container(
+    padding: EdgeInsets.all(width * 0.05),
+    color: Colors.white,
+    height: 230,
+    width: width,
+    child: ListView(
+      children: [
+        Text(
+          "Akun",
+          style: TextStyle(
+            color: Color.fromARGB(255, 75, 169, 247),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          "+62 821 39xxxxxx",
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(
+          "Ketuk untuk ganti nomor telepon",
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey,
+          ),
+        ),
+        Divider(),
+        Text(
+          "@YogaBayuAP",
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(
+          "username",
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey,
+          ),
+        ),
+        Divider(),
+        Text(
+          "Ajg",
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(
+          "Bio",
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _header(context) {
+  final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
+  return Container(
+    color: Color.fromARGB(255, 99, 168, 224),
+    height: width * 0.35,
+    child: Column(
+      children: [
+        Row(
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              width: width * 0.5,
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.qr_code,
+                color: Colors.white,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.more_vert_rounded,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        ListTile(
+          onTap: () {},
+          leading: CircleAvatar(
+            radius: 27,
+            backgroundImage:
+                NetworkImage('https://picsum.photos/seed/girl/200/300'),
+          ),
+          title: Text(
+            "Y O G A",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            "online",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+            ),
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget _pengaturan(context) {
+  final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
+  return Container(
+    padding: EdgeInsets.all(width * 0.05),
+    color: Colors.white,
+    height: height * 0.55,
+    width: width,
+    child: ListView(
+      children: [
+        Text(
+          "Pengaturan",
+          style: TextStyle(
+            color: Color.fromARGB(255, 75, 169, 247),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        ListTile(
+          leading: FaIcon(FontAwesomeIcons.bell),
+          title: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.4)),
+              ),
+            ),
+            child: Text("Notifikasi dan Suara"),
+          ),
+        ),
+      ],
+    ),
+  );
 }
