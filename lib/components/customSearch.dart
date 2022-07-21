@@ -1,5 +1,6 @@
 //TODO belum selesai customsearch
 
+import 'package:clone_telegram/model/media.dart';
 import 'package:clone_telegram/model/obrolan.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,8 +14,6 @@ class CustomSearch extends StatefulWidget {
 
 class _CustomSearchState extends State<CustomSearch> {
   final FocusNode _focusNode = FocusNode();
-  bool _isSelected = false;
-
   @override
   void initState() {
     super.initState();
@@ -122,25 +121,15 @@ class _CustomSearchState extends State<CustomSearch> {
         ),
         body: TabBarView(
           children: [
-            obrolan(context),
-            const Center(
-              child: Text('This is Media screen.'),
-            ),
-            const Center(
-              child: Text('This is Unduhan screen.'),
-            ),
-            const Center(
-              child: Text('This is Tautan screen.'),
-            ),
-            const Center(
-              child: Text('This is Obrolan screen.'),
-            ),
-            const Center(
-              child: Text('This is Media screen.'),
-            ),
-            const Center(
-              child: Text('This is Unduhan screen.'),
-            ),
+            _obrolan(context),
+            _media(context),
+            _unduhan(context),
+
+            //TODO belum selesai
+            _tautan(context),
+            _berkas(context),
+            _musik(context),
+            _suara(context),
           ],
         ),
       ),
@@ -148,9 +137,8 @@ class _CustomSearchState extends State<CustomSearch> {
   }
 }
 
-Widget obrolan(context) {
+Widget _obrolan(context) {
   final double width = MediaQuery.of(context).size.width;
-  final double height = MediaQuery.of(context).size.height;
   return Container(
     child: Column(
       children: [
@@ -306,4 +294,111 @@ Widget _terkini(
       ],
     ),
   );
+}
+
+Widget _media(context) {
+  return GridView.builder(
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisSpacing: 0,
+      mainAxisSpacing: 0,
+      crossAxisCount: 3,
+    ),
+    itemCount: itemMedia.length,
+    itemBuilder: (context, index) {
+      final _itemMedia = itemMedia[index];
+      return Container(
+        padding: EdgeInsets.all(5),
+        child: Image(
+          fit: BoxFit.cover,
+          image: NetworkImage(_itemMedia.image + "${index}"),
+        ),
+      );
+    },
+  );
+}
+
+Widget _unduhan(context) {
+  final double width = MediaQuery.of(context).size.width;
+  return Container(
+    child: Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          width: width,
+          height: width * 0.06,
+          color: Colors.grey.withOpacity(0.15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Terkini",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              Text(
+                "Hapus Semua",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+        ListTile(
+          leading: Container(
+            width: 50,
+            height: 50,
+            child: Image(
+              fit: BoxFit.cover,
+              image: NetworkImage("https://picsum.photos/200/300?random=1"),
+            ),
+          ),
+          title: Text("Jujtsu Kaisen Movie"),
+          subtitle: Text("3.6 GB."),
+        ),
+        ListTile(
+          leading: Container(
+            width: 50,
+            height: 50,
+            child: Image(
+              fit: BoxFit.cover,
+              image: NetworkImage("https://picsum.photos/200/300?random=1"),
+            ),
+          ),
+          title: Text("Jujtsu Kaisen Movie"),
+          subtitle: Text("3.6 GB."),
+        ),
+        ListTile(
+          leading: Container(
+            width: 50,
+            height: 50,
+            child: Image(
+              fit: BoxFit.cover,
+              image: NetworkImage("https://picsum.photos/200/300?random=1"),
+            ),
+          ),
+          title: Text("Jujtsu Kaisen Movie"),
+          subtitle: Text("3.6 GB."),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _tautan(context) {
+  return Text("tautan page");
+}
+
+Widget _berkas(context) {
+  return Text("berkas page");
+}
+
+Widget _musik(context) {
+  return Text("musik page");
+}
+
+Widget _suara(context) {
+  return Text("suara page");
 }

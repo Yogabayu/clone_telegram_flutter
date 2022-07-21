@@ -91,28 +91,20 @@ class _ChatScreenState extends State<ChatScreen> {
 Route _createRoute(
     String urlImage, String title, var time, onOff, String msgs, context) {
   return PageRouteBuilder(
+    transitionDuration: Duration(milliseconds: 100),
+    reverseTransitionDuration: Duration(milliseconds: 100),
     pageBuilder: (context, animation, secondaryAnimation) =>
         message(urlImage, title, onOff, context),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return Stack(
-        children: <Widget>[
-          //exit
-          SlideTransition(
-            position: new Tween<Offset>(
-              begin: const Offset(0.0, 0.0),
-              end: const Offset(-1.0, 0.0),
-            ).animate(animation),
-            child: child,
-          ),
-          //enter page
-          SlideTransition(
-            position: new Tween<Offset>(
-              begin: const Offset(1.0, 0.0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          )
-        ],
+      const begin = Offset(1.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.easeIn;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
       );
     },
   );
@@ -124,8 +116,9 @@ Widget contact(String urlImage, String title, var time, onOff, String msgs,
     children: [
       ListTile(
         onTap: () {
-          Navigator.of(context)
-              .push(_createRoute(urlImage, title, time, onOff, msgs, context));
+          Navigator.of(context).push(
+            _createRoute(urlImage, title, time, onOff, msgs, context),
+          );
         },
         leading: Stack(
           children: [

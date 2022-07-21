@@ -1,7 +1,7 @@
+import 'package:clone_telegram/model/pengaturan.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-//TODO penbaturan blm selesai
 class Pengaturan extends StatefulWidget {
   const Pengaturan({Key? key}) : super(key: key);
 
@@ -15,48 +15,70 @@ class _PengaturanState extends State<Pengaturan> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: ListView(
-        children: [
-          Stack(
-            children: [
-              Column(
-                children: [
-                  _header(context),
-                  _akun(context),
-                  Divider(color: Colors.transparent),
-                  _pengaturan(context),
-                ],
-              ),
-              Positioned(
-                top: width * 0.28,
-                left: width * 0.8,
-                child: Container(
-                  decoration: BoxDecoration(
-                    // border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(width * 0.8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        blurRadius: 0.1,
-                        offset: Offset(0, 3), // changes position of shadow
+      body: Container(
+        width: width,
+        height: height,
+        child: ListView(
+          physics: ClampingScrollPhysics(),
+          children: [
+            Stack(
+              children: [
+                Column(
+                  children: [
+                    _header(context),
+                    _akun(context),
+                    Divider(color: Colors.transparent),
+                    _pengaturan(context),
+                    Divider(color: Colors.transparent),
+                    _premium(context),
+                    Divider(color: Colors.transparent),
+                    _bantuan(context),
+                    Container(
+                      color: Colors.transparent,
+                      child: Text(
+                        "Telegram untuk Android v8.8.4 (2711) store bundled arm64-v8a",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
                       ),
-                    ],
-                  ),
-                  child: CircleAvatar(
-                    radius: 27,
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.camera_alt_outlined,
-                      color: Colors.grey.withOpacity(0.6),
-                      size: 30,
-                      // color: Colors.black,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    )
+                  ],
+                ),
+                Positioned(
+                  top: width * 0.28,
+                  left: width * 0.8,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      // border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(width * 0.8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          blurRadius: 0.1,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: CircleAvatar(
+                      radius: 27,
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        color: Colors.grey.withOpacity(0.6),
+                        size: 30,
+                        // color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -77,7 +99,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Container(
       padding: EdgeInsets.only(top: width * 0.1),
       height: preferredSize.height,
@@ -89,11 +110,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 Widget _akun(context) {
   final width = MediaQuery.of(context).size.width;
-  final height = MediaQuery.of(context).size.height;
   return Container(
     padding: EdgeInsets.all(width * 0.05),
     color: Colors.white,
-    height: 230,
+    height: 215,
     width: width,
     child: ListView(
       children: [
@@ -164,7 +184,6 @@ Widget _akun(context) {
 
 Widget _header(context) {
   final width = MediaQuery.of(context).size.width;
-  final height = MediaQuery.of(context).size.height;
   return Container(
     color: Color.fromARGB(255, 99, 168, 224),
     height: width * 0.35,
@@ -173,7 +192,9 @@ Widget _header(context) {
         Row(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Icon(
                 Icons.arrow_back,
                 color: Colors.white,
@@ -239,9 +260,10 @@ Widget _pengaturan(context) {
   return Container(
     padding: EdgeInsets.all(width * 0.05),
     color: Colors.white,
-    height: height * 0.55,
+    height: height * 0.69,
     width: width,
-    child: ListView(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Pengaturan",
@@ -253,18 +275,106 @@ Widget _pengaturan(context) {
         SizedBox(
           height: 10,
         ),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: dummyPengaturan.length,
+          itemBuilder: (context, index) {
+            var _dummyPengaturan = dummyPengaturan[index];
+            return ListTile(
+              leading: FaIcon(_dummyPengaturan.ikon),
+              title: Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+                  ),
+                ),
+                child: Text(_dummyPengaturan.title),
+              ),
+            );
+          },
+        )
+      ],
+    ),
+  );
+}
+
+Widget _premium(context) {
+  final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
+  return Container(
+    // margin: EdgeInsets.only(bottom: 50),
+    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+    color: Colors.white,
+    width: width,
+    height: height * 0.08,
+    child: ListTile(
+      leading: FaIcon(
+        FontAwesomeIcons.star,
+        color: Color.fromARGB(255, 138, 43, 226),
+      ),
+      title: Text("Telegram Premium"),
+    ),
+  );
+}
+
+Widget _bantuan(context) {
+  final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
+  return Container(
+    padding: EdgeInsets.all(width * 0.05),
+    color: Colors.white,
+    height: height * 0.3,
+    width: width,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Bantuan",
+          style: TextStyle(
+            color: Color.fromARGB(255, 75, 169, 247),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
         ListTile(
-          leading: FaIcon(FontAwesomeIcons.bell),
+          leading: FaIcon(FontAwesomeIcons.commentDots),
           title: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(color: Colors.grey.withOpacity(0.4)),
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
               ),
             ),
-            child: Text("Notifikasi dan Suara"),
+            child: Text("Kirim Pertanyaan"),
           ),
         ),
+        ListTile(
+          leading: FaIcon(FontAwesomeIcons.circleQuestion),
+          title: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+              ),
+            ),
+            child: Text("Pertanyaan Umum"),
+          ),
+        ),
+        ListTile(
+          leading: FaIcon(FontAwesomeIcons.shield),
+          title: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+              ),
+            ),
+            child: Text("Kebijakan Privasi"),
+          ),
+        )
       ],
     ),
   );

@@ -9,27 +9,18 @@ Route _createRoute() {
   return PageRouteBuilder(
     transitionDuration: Duration(milliseconds: 100),
     reverseTransitionDuration: Duration(milliseconds: 100),
-    pageBuilder: (context, animation, secondaryAnimation) => CustomSearch(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const CustomSearch(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return Stack(
-        children: <Widget>[
-          //exit
-          SlideTransition(
-            position: new Tween<Offset>(
-              begin: const Offset(0.0, 0.0),
-              end: const Offset(-1.0, 0.0),
-            ).animate(animation),
-            child: child,
-          ),
-          //enter page
-          SlideTransition(
-            position: new Tween<Offset>(
-              begin: const Offset(1.0, -1.0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          )
-        ],
+      const begin = Offset(1.0, -1.0);
+      const end = Offset.zero;
+      const curve = Curves.easeIn;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
       );
     },
   );
