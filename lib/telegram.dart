@@ -1,4 +1,4 @@
-import 'package:clone_telegram/components/customSearch.dart';
+import 'package:clone_telegram/screens/Search/customSearch.dart';
 // import 'package:clone_telegram/components/searchBar.dart';
 import 'package:clone_telegram/components/sidemenu.dart';
 import 'package:clone_telegram/screens/chatScreen/chatScreen.dart';
