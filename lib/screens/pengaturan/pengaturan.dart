@@ -2,6 +2,7 @@ import 'package:clone_telegram/model/pengaturan.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+//TODO darktheme pengaturan blm selesai
 class Pengaturan extends StatefulWidget {
   const Pengaturan({Key? key}) : super(key: key);
 
