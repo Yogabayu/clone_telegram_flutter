@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:clone_telegram/provider/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
-//TODO kontak blm selesai
 class Contact extends StatefulWidget {
   const Contact({Key? key}) : super(key: key);
 
@@ -11,13 +13,72 @@ class Contact extends StatefulWidget {
 }
 
 class _ContactState extends State<Contact> {
+  ScrollController _scrollController =
+      new ScrollController(); // set controller on scrolling
+  bool _show = true;
+
+  Duration duration = Duration(milliseconds: 300);
+
+  @override
+  void initState() {
+    super.initState();
+    handleScroll();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(() {});
+    super.dispose();
+  }
+
+  void showFloationButton() {
+    setState(() {
+      _show = true;
+    });
+  }
+
+  void handleScroll() async {
+    _scrollController.addListener(() {
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        hideFloationButton();
+      }
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        showFloationButton();
+      }
+    });
+  }
+
+  void hideFloationButton() {
+    setState(() {
+      _show = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-    final double height = MediaQuery.of(context).size.height;
+    Random random = Random();
+    int randomInt = random.nextInt(100);
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Scaffold(
+          floatingActionButton: AnimatedSlide(
+            duration: duration,
+            offset: _show ? Offset.zero : Offset(0, 2),
+            child: AnimatedOpacity(
+              duration: duration,
+              opacity: _show ? 1 : 0,
+              child: FloatingActionButton(
+                onPressed: () {
+                  // Add your onPressed code here!
+                },
+                backgroundColor: Colors.blue[300],
+                child: Icon(Icons.person_add_alt_1_sharp),
+              ),
+            ),
+          ),
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
@@ -36,10 +97,12 @@ class _ContactState extends State<Contact> {
             ],
           ),
           body: Container(
-            child: Scrollbar(
-              thickness: 7,
+            child: RawScrollbar(
+              thumbColor: Colors.grey,
+              thickness: 6,
               thumbVisibility: true,
               child: ListView(
+                controller: _scrollController,
                 children: [
                   ListTile(
                     visualDensity: VisualDensity(horizontal: 0, vertical: 0),
@@ -59,32 +122,40 @@ class _ContactState extends State<Contact> {
                   ),
                   Container(
                     width: width,
-                    height: 25,
+                    height: 28,
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(174, 158, 158, 158),
+                      color:
+                          Color.fromARGB(174, 158, 158, 158).withOpacity(0.1),
                     ),
                     child: Text(
                       "Urutan Berdasarkan waktu terlihat",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 66, 66, 66),
+                        color: Color.fromARGB(255, 66, 66, 66).withOpacity(0.8),
                       ),
                     ),
                   ),
-                  Container(
-                    width: width,
-                    height: height * 0.69,
-                    child: ListView.builder(
-                      itemCount: 7,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Icon(Icons.abc),
-                          title: Text("data"),
-                          subtitle: Text("data"),
-                        );
-                      },
-                    ),
-                  ),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "terlihat pada 18.40", false),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "terlihat pada 18.40", false),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "terlihat pada 18.40", false),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "terlihat pada 18.40", false),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "terlihat pada 18.40", false),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "terlihat pada 18.40", false),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "online", true),
+                  _kontakItem("user${randomInt}", "terlihat pada 18.40", false),
                 ],
               ),
             ),
@@ -93,4 +164,27 @@ class _ContactState extends State<Contact> {
       },
     );
   }
+}
+
+Widget _kontakItem(String title, String subtitle, bool isOnline) {
+  Random random = Random();
+  int randomInt = random.nextInt(100);
+
+  return ListTile(
+    leading: CircleAvatar(
+      radius: 25,
+      backgroundImage:
+          NetworkImage("https://picsum.photos/200/300?random=${randomInt}"),
+      backgroundColor: Colors.transparent,
+    ),
+    title: Text(
+      title,
+    ),
+    subtitle: Text(
+      subtitle,
+      style: TextStyle(
+        color: isOnline ? Colors.blue : Colors.grey,
+      ),
+    ),
+  );
 }
