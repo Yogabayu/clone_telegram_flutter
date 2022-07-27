@@ -1,4 +1,3 @@
-import 'package:clone_telegram/provider/scroll.dart';
 import 'package:clone_telegram/provider/theme.dart';
 import 'package:clone_telegram/screens/SplashScreen/splashScreen.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Scroll()),
+        ChangeNotifierProvider(create: (context) => ThemeModel()),
       ],
       child: const MyApp(),
     ),
@@ -20,18 +19,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   title: 'Telegram clone',
-    //   darkTheme: ThemeData.dark(),
-    //   theme: ThemeData(primarySwatch: Colors.blueGrey),
-    //   home: const SplashScreen(),
-    // );
-
     return ChangeNotifierProvider(
       create: (_) => ThemeModel(),
       child: Consumer<ThemeModel>(
-        builder: ((context, ThemeModel themeNotifier, child) {
+        builder: (context, ThemeModel themeNotifier, child) {
           return MaterialApp(
             title: 'Telegram Clone',
             theme: themeNotifier.isDark
@@ -40,7 +31,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: SplashScreen(),
           );
-        }),
+        },
       ),
     );
   }

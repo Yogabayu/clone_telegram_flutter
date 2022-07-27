@@ -1,92 +1,292 @@
 // ignore_for_file: unused_local_variable, unused_import
+import 'package:clone_telegram/provider/theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+// class ChatScreen extends StatefulWidget {
+//   const ChatScreen({Key? key}) : super(key: key);
 
-  @override
-  _ChatScreenState createState() => _ChatScreenState();
-}
+//   @override
+//   _ChatScreenState createState() => _ChatScreenState();
+// }
 
-class _ChatScreenState extends State<ChatScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        children: [
-          contact(
-            'https://picsum.photos/seed/mu/200/300',
-            'Pinos',
-            '19:30',
-            'online',
-            'Mabar kuy',
-            context,
-            true,
-            "20",
-            true,
-          ),
-          contact(
-            'https://picsum.photos/seed/kid/200/300',
-            'Joni',
-            '19:30',
-            'terlihat 32 Feb pada 01.05',
-            'Mabar kuy',
-            context,
-            true,
-            "20",
-            false,
-          ),
-          contact(
-            'https://picsum.photos/seed/man/200/300',
-            'Bendot',
-            '19:30',
-            'online',
-            'Minta qwe',
-            context,
-            false,
-            "1",
-            false,
-          ),
-          contact(
-            'https://picsum.photos/seed/girl/200/300',
-            'Kang Bakso',
-            '19:30',
-            'online',
-            'Anjay mabar',
-            context,
-            false,
-            "",
-            false,
-          ),
-          contact(
-            'https://picsum.photos/seed/man/200/300',
-            'Bendot',
-            '19:30',
-            'online',
-            'Minta qwe',
-            context,
-            false,
-            "1",
-            false,
-          ),
-          contact(
-            'https://picsum.photos/seed/girl/200/300',
-            'Kang Bakso',
-            '19:30',
-            'online',
-            'Anjay mabar',
-            context,
-            false,
-            "",
-            false,
-          ),
-        ],
-      ),
-    );
-  }
-}
+// class _ChatScreenState extends State<ChatScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: ListView(
+//         children: [
+//           contact(
+//             'https://picsum.photos/seed/mu/200/300',
+//             'Pinos',
+//             '19:30',
+//             'online',
+//             'Mabar kuy',
+//             context,
+//             true,
+//             "20",
+//             true,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/kid/200/300',
+//             'Joni',
+//             '19:30',
+//             'terlihat 32 Feb pada 01.05',
+//             'Mabar kuy',
+//             context,
+//             true,
+//             "20",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/man/200/300',
+//             'Bendot',
+//             '19:30',
+//             'online',
+//             'Minta qwe',
+//             context,
+//             false,
+//             "1",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/girl/200/300',
+//             'Kang Bakso',
+//             '19:30',
+//             'online',
+//             'Anjay mabar',
+//             context,
+//             false,
+//             "",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/man/200/300',
+//             'Bendot',
+//             '19:30',
+//             'online',
+//             'Minta qwe',
+//             context,
+//             false,
+//             "1",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/girl/200/300',
+//             'Kang Bakso',
+//             '19:30',
+//             'online',
+//             'Anjay mabar',
+//             context,
+//             false,
+//             "",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/mu/200/300',
+//             'Pinos',
+//             '19:30',
+//             'online',
+//             'Mabar kuy',
+//             context,
+//             true,
+//             "20",
+//             true,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/kid/200/300',
+//             'Joni',
+//             '19:30',
+//             'terlihat 32 Feb pada 01.05',
+//             'Mabar kuy',
+//             context,
+//             true,
+//             "20",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/man/200/300',
+//             'Bendot',
+//             '19:30',
+//             'online',
+//             'Minta qwe',
+//             context,
+//             false,
+//             "1",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/girl/200/300',
+//             'Kang Bakso',
+//             '19:30',
+//             'online',
+//             'Anjay mabar',
+//             context,
+//             false,
+//             "",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/man/200/300',
+//             'Bendot',
+//             '19:30',
+//             'online',
+//             'Minta qwe',
+//             context,
+//             false,
+//             "1",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/girl/200/300',
+//             'Kang Bakso',
+//             '19:30',
+//             'online',
+//             'Anjay mabar',
+//             context,
+//             false,
+//             "",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/mu/200/300',
+//             'Pinos',
+//             '19:30',
+//             'online',
+//             'Mabar kuy',
+//             context,
+//             true,
+//             "20",
+//             true,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/kid/200/300',
+//             'Joni',
+//             '19:30',
+//             'terlihat 32 Feb pada 01.05',
+//             'Mabar kuy',
+//             context,
+//             true,
+//             "20",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/man/200/300',
+//             'Bendot',
+//             '19:30',
+//             'online',
+//             'Minta qwe',
+//             context,
+//             false,
+//             "1",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/girl/200/300',
+//             'Kang Bakso',
+//             '19:30',
+//             'online',
+//             'Anjay mabar',
+//             context,
+//             false,
+//             "",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/man/200/300',
+//             'Bendot',
+//             '19:30',
+//             'online',
+//             'Minta qwe',
+//             context,
+//             false,
+//             "1",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/girl/200/300',
+//             'Kang Bakso',
+//             '19:30',
+//             'online',
+//             'Anjay mabar',
+//             context,
+//             false,
+//             "",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/mu/200/300',
+//             'Pinos',
+//             '19:30',
+//             'online',
+//             'Mabar kuy',
+//             context,
+//             true,
+//             "20",
+//             true,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/kid/200/300',
+//             'Joni',
+//             '19:30',
+//             'terlihat 32 Feb pada 01.05',
+//             'Mabar kuy',
+//             context,
+//             true,
+//             "20",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/man/200/300',
+//             'Bendot',
+//             '19:30',
+//             'online',
+//             'Minta qwe',
+//             context,
+//             false,
+//             "1",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/girl/200/300',
+//             'Kang Bakso',
+//             '19:30',
+//             'online',
+//             'Anjay mabar',
+//             context,
+//             false,
+//             "",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/man/200/300',
+//             'Bendot',
+//             '19:30',
+//             'online',
+//             'Minta qwe',
+//             context,
+//             false,
+//             "1",
+//             false,
+//           ),
+//           contact(
+//             'https://picsum.photos/seed/girl/200/300',
+//             'Kang Bakso',
+//             '19:30',
+//             'online',
+//             'Anjay mabar',
+//             context,
+//             false,
+//             "",
+//             false,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 Route _createRoute(
     String urlImage, String title, var time, onOff, String msgs, context) {
@@ -551,80 +751,87 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
   Widget _buildTextComposer() {
     bool sendMic = false;
 
-    return Container(
-      // margin: const EdgeInsets.symmetric(
-      //   horizontal: 8.0,
-      // ),
-      child: Row(
-        children: [
-          Flexible(
-            child: Container(
-              height: 50,
-              child: TextField(
-                controller: _textController,
-                onChanged: (text) {
-                  setState(() {
-                    sendMic = true;
-                  });
-                },
-                onSubmitted: _handleSubmitted,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.zero,
-                  border: OutlineInputBorder(
-                    // borderRadius: BorderRadius.circular(25.7),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  prefixIcon: const Icon(
-                    Icons.emoji_emotions_outlined,
-                    color: Colors.grey,
-                  ),
-                  hintText: 'Pesan',
-                  hintStyle: const TextStyle(fontSize: 20, color: Colors.grey),
-                  suffixIconConstraints:
-                      const BoxConstraints(minWidth: 80, maxWidth: 100),
-                  suffixIcon: _textController.text == ''
-                      ? Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.attach_file_outlined,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            IconButton(
+    return Consumer<ThemeModel>(
+      builder: (context, ThemeModel themeNotifier, child) {
+        return Container(
+          // margin: const EdgeInsets.symmetric(
+          //   horizontal: 8.0,
+          // ),
+          child: Row(
+            children: [
+              Flexible(
+                child: Container(
+                  height: 50,
+                  child: TextField(
+                    controller: _textController,
+                    onChanged: (text) {
+                      setState(() {
+                        sendMic = true;
+                      });
+                    },
+                    onSubmitted: _handleSubmitted,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(25.7),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
+                      filled: true,
+                      fillColor:
+                          themeNotifier.isDark ? Colors.black : Colors.white,
+                      prefixIcon: const Icon(
+                        Icons.emoji_emotions_outlined,
+                        color: Colors.grey,
+                      ),
+                      hintText: 'Pesan',
+                      hintStyle:
+                          const TextStyle(fontSize: 20, color: Colors.grey),
+                      suffixIconConstraints:
+                          const BoxConstraints(minWidth: 80, maxWidth: 100),
+                      suffixIcon: _textController.text == ''
+                          ? Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.attach_file_outlined,
+                                  color: Colors.grey,
+                                ),
+                                SizedBox(
+                                  width: 16,
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.mic_none_outlined,
+                                  ),
+                                  onPressed: () => // MODIFIED
+                                      _handleSubmitted(
+                                          _textController.text) // MODIFIED
+                                  ,
+                                ),
+                              ],
+                            )
+                          : IconButton(
                               icon: Icon(
-                                Icons.mic_none_outlined,
+                                Icons.send,
+                                color: Colors.blue,
                               ),
                               onPressed: () => // MODIFIED
                                   _handleSubmitted(
                                       _textController.text) // MODIFIED
                               ,
                             ),
-                          ],
-                        )
-                      : IconButton(
-                          icon: Icon(
-                            Icons.send,
-                            color: Colors.blue,
-                          ),
-                          onPressed: () => // MODIFIED
-                              _handleSubmitted(_textController.text) // MODIFIED
-                          ,
-                        ),
+                    ),
+                    focusNode: _focusNode,
+                  ),
                 ),
-                focusNode: _focusNode,
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
