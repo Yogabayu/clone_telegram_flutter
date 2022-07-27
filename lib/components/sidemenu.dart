@@ -1,5 +1,6 @@
 import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:clone_telegram/provider/theme.dart';
+import 'package:clone_telegram/screens/kontak/contact.dart';
 import 'package:clone_telegram/screens/pengaturan/pengaturan.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -169,6 +170,12 @@ Widget _menuSide(IconData icon, String textMenu, context) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Pengaturan()),
+          );
+        }
+        if (textMenu == 'Kontak') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Contact()),
           );
         }
       },
