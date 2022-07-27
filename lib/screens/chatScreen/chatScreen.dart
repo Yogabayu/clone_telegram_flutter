@@ -659,54 +659,68 @@ class ChatMess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var dt = DateTime.now();
-    return SizeTransition(
-      sizeFactor:
-          CurvedAnimation(parent: animationController, curve: Curves.easeOut),
-      axisAlignment: 0.0,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 205, 243, 176),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10.0),
-            bottomLeft: Radius.circular(10.0),
-            topRight: Radius.circular(10.0),
-          ),
-        ),
-        margin: const EdgeInsets.symmetric(vertical: 2.0),
-        child: Row(
-          children: [
-            Text(
-              text,
-              style: TextStyle(fontSize: 17),
+
+    return Consumer<ThemeModel>(
+      builder: (context, ThemeModel themeNotifier, child) {
+        return SizeTransition(
+          sizeFactor: CurvedAnimation(
+              parent: animationController, curve: Curves.easeOut),
+          axisAlignment: 0.0,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            decoration: BoxDecoration(
+              color: themeNotifier.isDark
+                  ? Color.fromARGB(255, 35, 107, 167)
+                  : Color.fromARGB(255, 205, 243, 176),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.0),
+                bottomLeft: Radius.circular(10.0),
+                topRight: Radius.circular(10.0),
+              ),
             ),
-            SizedBox(
-              width: 7,
-            ),
-            Column(
+            margin: const EdgeInsets.symmetric(vertical: 2.0),
+            child: Row(
               children: [
-                Text(""),
-                Row(
+                Text(
+                  text,
+                  style: TextStyle(fontSize: 17),
+                ),
+                SizedBox(
+                  width: 7,
+                ),
+                Column(
                   children: [
-                    Text(
-                      dt.hour.toString() + ":" + dt.minute.toString(),
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Icon(
-                      Icons.done,
-                      size: 15,
-                      color: Colors.grey,
+                    Text(""),
+                    Row(
+                      children: [
+                        Text(
+                          dt.hour.toString() + ":" + dt.minute.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: themeNotifier.isDark
+                                ? Color.fromARGB(255, 185, 185, 185)
+                                : Colors.grey,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 7,
+                        ),
+                        Icon(
+                          Icons.done,
+                          size: 15,
+                          color: themeNotifier.isDark
+                              ? Color.fromARGB(255, 80, 171, 246)
+                              : Colors.grey,
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -844,104 +858,114 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox?;
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
-    return Container(
-      constraints: BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/chat_bg.jpg"),
+    return Consumer<ThemeModel>(
+        builder: (context, ThemeModel themeNotifier, child) {
+      return Container(
+        constraints: BoxConstraints.expand(),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage(themeNotifier.isDark
+              ? "assets/chat_bg_dark.jpg"
+              : "assets/chat_bg.jpg"),
           fit: BoxFit.cover,
-          colorFilter: ColorFilter.linearToSrgbGamma(),
-        ),
-      ),
-      child: Column(
-        // MODIFIED
-        children: [
-          _messages.isEmpty
-              ? Container(
-                  margin: EdgeInsets.only(top: height * 0.24),
-                  width: width * 0.65,
-                  height: width * 0.5,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.34),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      SizedBox(
-                        height: width * 0.05,
-                      ),
-                      Text(
-                        "Belum ada pesan di sini...",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: width * 0.07,
-                      ),
-                      Text(
-                        "Kirim pesan dan tekan sambutan di \nbawah.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: width * 0.01,
-                      ),
-                      SizedBox(
-                        child: Image.asset("assets/hi.gif"),
-                        height: width * 0.2,
-                      ),
-                    ],
-                  ),
-                )
-              : Text(""),
-          // NEW
-          Flexible(
+          // colorFilter: ColorFilter.linearToSrgbGamma(),
+        )
+            // image: DecorationImage(
+            //   image:  AssetImage("assets/chat_bg.jpg"),
+            //   fit: BoxFit.cover,
+            //   colorFilter: ColorFilter.linearToSrgbGamma(),
+            // ),
+            ),
+        child: Column(
+          // MODIFIED
+          children: [
+            _messages.isEmpty
+                ? Container(
+                    margin: EdgeInsets.only(top: height * 0.24),
+                    width: width * 0.65,
+                    height: width * 0.5,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.34),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        SizedBox(
+                          height: width * 0.05,
+                        ),
+                        Text(
+                          "Belum ada pesan di sini...",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: width * 0.07,
+                        ),
+                        Text(
+                          "Kirim pesan dan tekan sambutan di \nbawah.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: width * 0.01,
+                        ),
+                        SizedBox(
+                          child: Image.asset("assets/hi.gif"),
+                          height: width * 0.2,
+                        ),
+                      ],
+                    ),
+                  )
+                : Text(""),
             // NEW
-            child: ListView.builder(
+            Flexible(
               // NEW
-              padding: const EdgeInsets.all(8.0), // NEW
-              reverse: true, // NEW
-              itemBuilder: (_, index) => Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTapDown: getPosition,
-                    onLongPress: () {
-                      //FIX pop up menu
-                      showMenu<String>(
-                        context: context,
-                        position: relRectSize,
-                        items: [
-                          PopupMenuItem<String>(
-                            child: Text('Delete'),
-                            onTap: () {
-                              setState(() {
-                                _messages.removeAt(index);
-                              });
-                            },
-                            value: '1',
-                          ),
-                        ],
-                        elevation: 8.0,
-                      );
-                    },
-                    child: _messages[index],
-                  ),
-                ],
+              child: ListView.builder(
+                // NEW
+                padding: const EdgeInsets.all(8.0), // NEW
+                reverse: true, // NEW
+                itemBuilder: (_, index) => Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTapDown: getPosition,
+                      onLongPress: () {
+                        //FIX pop up menu
+                        showMenu<String>(
+                          context: context,
+                          position: relRectSize,
+                          items: [
+                            PopupMenuItem<String>(
+                              child: Text('Delete'),
+                              onTap: () {
+                                setState(() {
+                                  _messages.removeAt(index);
+                                });
+                              },
+                              value: '1',
+                            ),
+                          ],
+                          elevation: 8.0,
+                        );
+                      },
+                      child: _messages[index],
+                    ),
+                  ],
+                ), // NEW
+                itemCount: _messages.length, // NEW
               ), // NEW
-              itemCount: _messages.length, // NEW
             ), // NEW
-          ), // NEW
 
-          Container(
-            child: _buildTextComposer(), // MODIFIED
-          ), // NEW
-        ], // NEW
-      ),
-    );
+            Container(
+              child: _buildTextComposer(), // MODIFIED
+            ), // NEW
+          ], // NEW
+        ),
+      );
+    });
   }
 
   RelativeRect get relRectSize =>

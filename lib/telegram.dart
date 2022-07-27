@@ -1,9 +1,11 @@
+import 'package:clone_telegram/provider/theme.dart';
 import 'package:clone_telegram/screens/Search/customSearch.dart';
 import 'package:clone_telegram/components/sidemenu.dart';
 import 'package:clone_telegram/screens/chatScreen/chatScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 Route _createRoute() {
   return PageRouteBuilder(
@@ -109,109 +111,62 @@ class _TelegramState extends State<Telegram> {
       ),
       // body: ChatScreen(),
       body: Container(
-        child: ListView(
+        child: ListView.builder(
           controller: _scrollController,
-          children: [
-            contact(
-              'https://picsum.photos/seed/mu/200/300',
-              'Pinos',
-              '19:30',
-              'online',
-              'Mabar kuy',
-              context,
-              true,
-              "20",
-              true,
-            ),
-            contact(
-              'https://picsum.photos/seed/mu/200/300',
-              'Pinos',
-              '19:30',
-              'online',
-              'Mabar kuy',
-              context,
-              true,
-              "20",
-              true,
-            ),
-            contact(
-              'https://picsum.photos/seed/mu/200/300',
-              'Pinos',
-              '19:30',
-              'online',
-              'Mabar kuy',
-              context,
-              true,
-              "20",
-              true,
-            ),
-            contact(
-              'https://picsum.photos/seed/kid/200/300',
-              'Joni',
-              '19:30',
-              'terlihat 32 Feb pada 01.05',
-              'Mabar kuy',
-              context,
-              true,
-              "20",
-              false,
-            ),
-            contact(
-              'https://picsum.photos/seed/man/200/300',
-              'Bendot',
-              '19:30',
-              'online',
-              'Minta qwe',
-              context,
-              false,
-              "1",
-              false,
-            ),
-            contact(
-              'https://picsum.photos/seed/girl/200/300',
-              'Kang Bakso',
-              '19:30',
-              'online',
-              'Anjay mabar',
-              context,
-              false,
-              "",
-              false,
-            ),
-            contact(
-              'https://picsum.photos/seed/girl/200/300',
-              'Kang Bakso',
-              '19:30',
-              'online',
-              'Anjay mabar',
-              context,
-              false,
-              "",
-              false,
-            ),
-            contact(
-              'https://picsum.photos/seed/girl/200/300',
-              'Kang Bakso',
-              '19:30',
-              'online',
-              'Anjay mabar',
-              context,
-              false,
-              "",
-              false,
-            ),
-            contact(
-              'https://picsum.photos/seed/girl/200/300',
-              'Kang Bakso',
-              '19:30',
-              'online',
-              'Anjay mabar',
-              context,
-              false,
-              "",
-              false,
-            ),
-          ],
+          itemCount: 12,
+          itemBuilder: (context, index) {
+            if (index == 0 || index == 1) {
+              return contact(
+                'https://picsum.photos/seed/user/200/300',
+                'User ${index}',
+                '0${index}:00',
+                'online',
+                'Status User${index}',
+                context,
+                true,
+                "20",
+                true,
+              );
+            }
+            if (index == 2 || index == 3) {
+              return contact(
+                'https://picsum.photos/seed/user/200/300',
+                'Grup ${index}',
+                '0${index}:00',
+                'offline',
+                'Status User${index}',
+                context,
+                false,
+                "17",
+                false,
+              );
+            }
+            if (index == 4 || index == 5) {
+              return contact(
+                'https://picsum.photos/seed/user/200/300',
+                'User ${index}',
+                '0${index}:00',
+                'online',
+                'Status User${index}',
+                context,
+                true,
+                "20",
+                false,
+              );
+            } else {
+              return contact(
+                'https://picsum.photos/seed/girl/200/300',
+                'Kang Bakso',
+                '19:30',
+                'online',
+                'Anjay mabar',
+                context,
+                true,
+                "",
+                false,
+              );
+            }
+          },
         ),
       ),
     );
