@@ -1,6 +1,8 @@
 import 'package:clone_telegram/model/pengaturan.dart';
+import 'package:clone_telegram/provider/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 //TODO darktheme pengaturan blm selesai
 class Pengaturan extends StatefulWidget {
@@ -16,6 +18,7 @@ class _PengaturanState extends State<Pengaturan> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
         width: width,
         height: height,
@@ -111,272 +114,306 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 Widget _akun(context) {
   final width = MediaQuery.of(context).size.width;
-  return Container(
-    padding: EdgeInsets.all(width * 0.05),
-    color: Colors.white,
-    height: 215,
-    width: width,
-    child: ListView(
-      children: [
-        Text(
-          "Akun",
-          style: TextStyle(
-            color: Color.fromARGB(255, 75, 169, 247),
-            fontWeight: FontWeight.bold,
-          ),
+
+  return Consumer<ThemeModel>(
+    builder: (context, ThemeModel themeNotifier, child) {
+      return Container(
+        padding: EdgeInsets.all(width * 0.05),
+        color: themeNotifier.isDark
+            ? Color.fromARGB(255, 29, 31, 31)
+            : Colors.white,
+        height: 215,
+        width: width,
+        child: ListView(
+          children: [
+            Text(
+              "Akun",
+              style: TextStyle(
+                color: Color.fromARGB(255, 75, 169, 247),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "+62 821 39xxxxxx",
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "Ketuk untuk ganti nomor telepon",
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+              ),
+            ),
+            Divider(),
+            Text(
+              "@YogaBayuAP",
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "username",
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+              ),
+            ),
+            Divider(),
+            Text(
+              "Ajg",
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "Bio",
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+              ),
+            ),
+          ],
         ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          "+62 821 39xxxxxx",
-          style: TextStyle(
-            fontSize: 17,
-          ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Text(
-          "Ketuk untuk ganti nomor telepon",
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey,
-          ),
-        ),
-        Divider(),
-        Text(
-          "@YogaBayuAP",
-          style: TextStyle(
-            fontSize: 17,
-          ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Text(
-          "username",
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey,
-          ),
-        ),
-        Divider(),
-        Text(
-          "Ajg",
-          style: TextStyle(
-            fontSize: 17,
-          ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Text(
-          "Bio",
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey,
-          ),
-        ),
-      ],
-    ),
+      );
+    },
   );
 }
 
 Widget _header(context) {
   final width = MediaQuery.of(context).size.width;
-  return Container(
-    color: Color.fromARGB(255, 99, 168, 224),
-    height: width * 0.35,
-    child: Column(
-      children: [
-        Row(
+  return Consumer<ThemeModel>(
+    builder: (context, ThemeModel themeNotifier, child) {
+      return Container(
+        color: themeNotifier.isDark
+            ? Color.fromARGB(255, 46, 80, 107)
+            : Color.fromARGB(255, 0, 0, 0),
+        height: width * 0.35,
+        child: Column(
           children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: width * 0.5,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.qr_code,
+                    color: Colors.white,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.more_vert_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            ListTile(
+              onTap: () {},
+              leading: CircleAvatar(
+                radius: 27,
+                backgroundImage:
+                    NetworkImage('https://picsum.photos/seed/girl/200/300'),
               ),
-            ),
-            SizedBox(
-              width: width * 0.5,
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.qr_code,
-                color: Colors.white,
+              title: Text(
+                "Y O G A",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
+              subtitle: Text(
+                "online",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                ),
               ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.more_vert_rounded,
-                color: Colors.white,
-              ),
-            ),
+            )
           ],
         ),
-        ListTile(
-          onTap: () {},
-          leading: CircleAvatar(
-            radius: 27,
-            backgroundImage:
-                NetworkImage('https://picsum.photos/seed/girl/200/300'),
-          ),
-          title: Text(
-            "Y O G A",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Text(
-            "online",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),
-          ),
-        )
-      ],
-    ),
+      );
+    },
   );
 }
 
 Widget _pengaturan(context) {
   final width = MediaQuery.of(context).size.width;
   final height = MediaQuery.of(context).size.height;
-  return Container(
-    padding: EdgeInsets.all(width * 0.05),
-    color: Colors.white,
-    height: height * 0.69,
-    width: width,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Pengaturan",
-          style: TextStyle(
-            color: Color.fromARGB(255, 75, 169, 247),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: dummyPengaturan.length,
-          itemBuilder: (context, index) {
-            var _dummyPengaturan = dummyPengaturan[index];
-            return ListTile(
-              leading: FaIcon(_dummyPengaturan.ikon),
-              title: Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
-                  ),
-                ),
-                child: Text(_dummyPengaturan.title),
+
+  return Consumer<ThemeModel>(
+    builder: (context, ThemeModel themeNotifier, child) {
+      return Container(
+        padding: EdgeInsets.all(width * 0.05),
+        color: themeNotifier.isDark
+            ? Color.fromARGB(255, 29, 31, 31)
+            : Colors.white,
+        height: height * 0.69,
+        width: width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Pengaturan",
+              style: TextStyle(
+                color: Color.fromARGB(255, 75, 169, 247),
+                fontWeight: FontWeight.bold,
               ),
-            );
-          },
-        )
-      ],
-    ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: dummyPengaturan.length,
+              itemBuilder: (context, index) {
+                var _dummyPengaturan = dummyPengaturan[index];
+                return ListTile(
+                  leading: FaIcon(_dummyPengaturan.ikon),
+                  title: Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+                      ),
+                    ),
+                    child: Text(_dummyPengaturan.title),
+                  ),
+                );
+              },
+            )
+          ],
+        ),
+      );
+    },
   );
 }
 
 Widget _premium(context) {
   final width = MediaQuery.of(context).size.width;
   final height = MediaQuery.of(context).size.height;
-  return Container(
-    // margin: EdgeInsets.only(bottom: 50),
-    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-    color: Colors.white,
-    width: width,
-    height: height * 0.08,
-    child: ListTile(
-      leading: FaIcon(
-        FontAwesomeIcons.star,
-        color: Color.fromARGB(255, 138, 43, 226),
-      ),
-      title: Text("Telegram Premium"),
-    ),
+
+  return Consumer<ThemeModel>(
+    builder: (context, ThemeModel themeNotifier, child) {
+      return Container(
+        // margin: EdgeInsets.only(bottom: 50),
+        padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+        color: themeNotifier.isDark
+            ? Color.fromARGB(255, 29, 31, 31)
+            : Colors.white,
+        width: width,
+        height: height * 0.08,
+        child: ListTile(
+          leading: FaIcon(
+            FontAwesomeIcons.star,
+            color: Color.fromARGB(255, 138, 43, 226),
+          ),
+          title: Text("Telegram Premium"),
+        ),
+      );
+    },
   );
 }
 
 Widget _bantuan(context) {
   final width = MediaQuery.of(context).size.width;
   final height = MediaQuery.of(context).size.height;
-  return Container(
-    padding: EdgeInsets.all(width * 0.05),
-    color: Colors.white,
-    height: height * 0.3,
-    width: width,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Bantuan",
-          style: TextStyle(
-            color: Color.fromARGB(255, 75, 169, 247),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        ListTile(
-          leading: FaIcon(FontAwesomeIcons.commentDots),
-          title: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+
+  return Consumer<ThemeModel>(
+    builder: (context, ThemeModel themeNotifier, child) {
+      return Container(
+        padding: EdgeInsets.all(width * 0.05),
+        color: themeNotifier.isDark
+            ? Color.fromARGB(255, 29, 31, 31)
+            : Colors.white,
+        height: height * 0.3,
+        width: width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Bantuan",
+              style: TextStyle(
+                color: Color.fromARGB(255, 75, 169, 247),
+                fontWeight: FontWeight.bold,
               ),
             ),
-            child: Text("Kirim Pertanyaan"),
-          ),
-        ),
-        ListTile(
-          leading: FaIcon(FontAwesomeIcons.circleQuestion),
-          title: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              leading: FaIcon(FontAwesomeIcons.commentDots),
+              title: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+                  ),
+                ),
+                child: Text("Kirim Pertanyaan"),
               ),
             ),
-            child: Text("Pertanyaan Umum"),
-          ),
-        ),
-        ListTile(
-          leading: FaIcon(FontAwesomeIcons.shield),
-          title: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ListTile(
+              leading: FaIcon(FontAwesomeIcons.circleQuestion),
+              title: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+                  ),
+                ),
+                child: Text("Pertanyaan Umum"),
               ),
             ),
-            child: Text("Kebijakan Privasi"),
-          ),
-        )
-      ],
-    ),
+            ListTile(
+              leading: FaIcon(FontAwesomeIcons.shield),
+              title: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+                  ),
+                ),
+                child: Text("Kebijakan Privasi"),
+              ),
+            )
+          ],
+        ),
+      );
+    },
   );
 }
