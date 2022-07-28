@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-//TODO darktheme pengaturan blm selesai
 class Pengaturan extends StatefulWidget {
   const Pengaturan({Key? key}) : super(key: key);
 
@@ -37,6 +36,9 @@ class _PengaturanState extends State<Pengaturan> {
                     _premium(context),
                     Divider(color: Colors.transparent),
                     _bantuan(context),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       color: Colors.transparent,
                       child: Text(
@@ -124,7 +126,9 @@ Widget _akun(context) {
             : Colors.white,
         height: 215,
         width: width,
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Akun",
@@ -199,7 +203,7 @@ Widget _header(context) {
     builder: (context, ThemeModel themeNotifier, child) {
       return Container(
         color: themeNotifier.isDark
-            ? Color.fromARGB(255, 46, 80, 107)
+            ? Color.fromARGB(255, 51, 51, 51)
             : Color.fromARGB(255, 0, 0, 0),
         height: width * 0.35,
         child: Column(
@@ -298,6 +302,7 @@ Widget _pengaturan(context) {
               height: 10,
             ),
             ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: dummyPengaturan.length,
               itemBuilder: (context, index) {
