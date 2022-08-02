@@ -210,7 +210,7 @@ Widget _header(context) {
       return Container(
         color: themeNotifier.isDark
             ? Color.fromARGB(255, 51, 51, 51)
-            : Color.fromARGB(255, 43, 91, 146),
+            : Color.fromARGB(255, 0, 0, 0),
         height: width * 0.35,
         child: Column(
           children: [
