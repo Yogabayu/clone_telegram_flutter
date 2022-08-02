@@ -17,76 +17,81 @@ class _PengaturanState extends State<Pengaturan> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Container(
-        width: width,
-        height: height,
-        child: ListView(
-          physics: ClampingScrollPhysics(),
-          children: [
-            Stack(
+    return Consumer<ThemeModel>(
+      builder: (context, ThemeModel themeNotifier, child) {
+        return Scaffold(
+          // backgroundColor: Colors.black,
+          body: Container(
+            width: width,
+            height: height,
+            child: ListView(
+              physics: ClampingScrollPhysics(),
               children: [
-                Column(
+                Stack(
                   children: [
-                    _header(context),
-                    _akun(context),
-                    Divider(color: Colors.transparent),
-                    _pengaturan(context),
-                    Divider(color: Colors.transparent),
-                    _premium(context),
-                    Divider(color: Colors.transparent),
-                    _bantuan(context),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      color: Colors.transparent,
-                      child: Text(
-                        "Telegram untuk Android v8.8.4 (2711) store bundled arm64-v8a",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.grey,
+                    Column(
+                      children: [
+                        _header(context),
+                        _akun(context),
+                        Divider(color: Colors.transparent),
+                        _pengaturan(context),
+                        Divider(color: Colors.transparent),
+                        _premium(context),
+                        Divider(color: Colors.transparent),
+                        _bantuan(context),
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    )
-                  ],
-                ),
-                Positioned(
-                  top: width * 0.28,
-                  left: width * 0.8,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      // border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(width * 0.8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 0.1,
-                          offset: Offset(0, 3), // changes position of shadow
+                        Container(
+                          color: Colors.transparent,
+                          child: Text(
+                            "Telegram untuk Android v8.8.4 (2711) store bundled arm64-v8a",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
                         ),
+                        SizedBox(
+                          height: 50,
+                        )
                       ],
                     ),
-                    child: CircleAvatar(
-                      radius: 27,
-                      backgroundColor: Colors.white,
-                      child: Icon(
-                        Icons.camera_alt_outlined,
-                        color: Colors.grey.withOpacity(0.6),
-                        size: 30,
-                        // color: Colors.black,
+                    Positioned(
+                      top: width * 0.28,
+                      left: width * 0.8,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          // border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(width * 0.8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              blurRadius: 0.1,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: CircleAvatar(
+                          radius: 27,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.grey.withOpacity(0.6),
+                            size: 30,
+                            // color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -205,7 +210,7 @@ Widget _header(context) {
       return Container(
         color: themeNotifier.isDark
             ? Color.fromARGB(255, 51, 51, 51)
-            : Color.fromARGB(255, 0, 0, 0),
+            : Color.fromARGB(255, 43, 91, 146),
         height: width * 0.35,
         child: Column(
           children: [
