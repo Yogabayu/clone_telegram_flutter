@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-//TODO blm selesai penggilan
+//TODO pengaturan scan barcode + camera
 class Pengaturan extends StatefulWidget {
   @override
   State<Pengaturan> createState() => _PengaturanState();
@@ -222,33 +222,32 @@ class _PengaturanState extends State<Pengaturan> {
             ),
           ),
           Positioned(
-              top: width * 0.55,
-              left: width * 0.8,
-              child: _isShrink
-                  ? SizedBox()
-                  : Container(
-                      decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(width * 0.8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            blurRadius: 0.1,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        radius: 27,
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.camera_alt_outlined,
-                          color: Colors.grey.withOpacity(0.6),
-                          size: 30,
-                          // color: Colors.black,
+            top: width * 0.55,
+            left: width * 0.8,
+            child: _isShrink
+                ? SizedBox()
+                : Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(width * 0.8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          blurRadius: 0.1,
+                          offset: Offset(0, 3),
                         ),
+                      ],
+                    ),
+                    child: CircleAvatar(
+                      radius: 27,
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        color: Colors.grey.withOpacity(0.6),
+                        size: 30,
                       ),
-                    )),
+                    ),
+                  ),
+          ),
         ],
       ),
     );
@@ -265,7 +264,6 @@ Widget _akun(context) {
         color: themeNotifier.isDark
             ? Color.fromARGB(255, 29, 31, 31)
             : Colors.white,
-        // height: width * 0.53,
         width: width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -418,7 +416,6 @@ Widget _header(context) {
 
 Widget _pengaturan(context) {
   final width = MediaQuery.of(context).size.width;
-  final height = MediaQuery.of(context).size.height;
 
   return Consumer<ThemeModel>(
     builder: (context, ThemeModel themeNotifier, child) {
