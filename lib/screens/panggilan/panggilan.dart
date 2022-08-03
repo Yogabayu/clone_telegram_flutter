@@ -64,14 +64,43 @@ class _PanggilanState extends State<Panggilan> {
                 ),
               ),
               elevation: 0,
-              backgroundColor: Colors.blueGrey,
+              backgroundColor: Color.fromARGB(255, 86, 163, 226),
               pinned: true,
               expandedHeight: 275,
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.parallax,
+                titlePadding: EdgeInsets.only(bottom: 15, left: 40),
                 title: _isShrink
-                    ? const Text(
-                        "Profile",
+                    // ? const Text(
+                    //     "Profile",
+                    //   )
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 25.0, left: 0),
+                        child: ListTile(
+                          // leading: Image.network(
+                          //   'https://picsum.photos/seed/girl/200/300',
+                          //   fit: BoxFit.cover,
+                          //   height: 30,
+                          //   width: 30,
+                          // ),
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                'https://picsum.photos/seed/girl/200/300'),
+                          ),
+                          title: Text(
+                            "Saya Aslinya Ultraman",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            "online",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       )
                     : null,
                 background: Container(
@@ -116,37 +145,21 @@ class _PanggilanState extends State<Panggilan> {
               actions: _isShrink
                   ? [
                       Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 12),
+                        padding: const EdgeInsets.only(left: 8, right: 5),
                         child: Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8, right: 8),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Text(
-                                    "Flipkart",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "flipkart.com",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.search,
+                                color: Colors.white,
                               ),
                             ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.network(
-                                'https://picsum.photos/seed/girl/200/300',
-                                fit: BoxFit.cover,
-                                height: 30,
-                                width: 30,
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.more_vert_rounded,
+                                color: Colors.white,
                               ),
                             ),
                           ],
@@ -269,6 +282,7 @@ class _PanggilanState extends State<Panggilan> {
 
 Widget _akun(context) {
   final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
 
   return Consumer<ThemeModel>(
     builder: (context, ThemeModel themeNotifier, child) {
@@ -277,7 +291,7 @@ Widget _akun(context) {
         color: themeNotifier.isDark
             ? Color.fromARGB(255, 29, 31, 31)
             : Colors.white,
-        height: 215,
+        height: width * 0.53,
         width: width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
