@@ -1,12 +1,14 @@
 // ignore_for_file: unused_element
 
+import 'dart:io';
+import 'package:clone_telegram/components/qr.dart';
 import 'package:clone_telegram/model/pengaturan.dart';
 import 'package:clone_telegram/provider/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-//TODO pengaturan scan barcode + camera
 class Pengaturan extends StatefulWidget {
   @override
   State<Pengaturan> createState() => _PengaturanState();
@@ -14,10 +16,21 @@ class Pengaturan extends StatefulWidget {
 
 class _PengaturanState extends State<Pengaturan> {
   ScrollController? _scrollController;
-
   bool lastStatus = true;
-
   double height = 200;
+  final ImagePicker imagePicker = ImagePicker();
+
+  final ImagePicker _picker = ImagePicker();
+  File? file;
+
+  Future<File?> takePhoto(ImageSource source) async {
+    final XFile? image = await _picker.pickImage(source: source);
+
+    setState(() {
+      file = File(image!.path);
+    });
+    return file;
+  }
 
   void _scrollListener() {
     if (_isShrink != lastStatus) {
@@ -70,17 +83,21 @@ class _PengaturanState extends State<Pengaturan> {
                   elevation: 0,
                   backgroundColor: Color.fromARGB(255, 86, 163, 226),
                   pinned: true,
-                  expandedHeight: 212,
+                  expandedHeight: width * 0.55,
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.parallax,
                     titlePadding: EdgeInsets.only(bottom: 15, left: 40),
                     title: _isShrink
                         ? Padding(
-                            padding: const EdgeInsets.only(top: 25.0, left: 0),
+                            padding:
+                                EdgeInsets.only(top: width * 0.05, left: 0),
                             child: ListTile(
                               leading: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    'https://picsum.photos/seed/girl/200/300'),
+                                backgroundImage: (file == null)
+                                    ? NetworkImage(
+                                        'https://picsum.photos/seed/girl/200/300')
+                                    : FileImage(File(file!.path))
+                                        as ImageProvider,
                               ),
                               title: Text(
                                 "Saya Aslinya Ultraman",
@@ -102,8 +119,10 @@ class _PengaturanState extends State<Pengaturan> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                              'https://picsum.photos/seed/girl/200/300'),
+                          image: (file == null)
+                              ? NetworkImage(
+                                  'https://picsum.photos/seed/girl/200/300')
+                              : FileImage(File(file!.path)) as ImageProvider,
                         ),
                       ),
                       child: Column(
@@ -167,7 +186,13 @@ class _PengaturanState extends State<Pengaturan> {
                             child: Row(
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Qr()),
+                                    );
+                                  },
                                   icon: Icon(
                                     Icons.qr_code,
                                     color: Colors.white,
@@ -222,7 +247,7 @@ class _PengaturanState extends State<Pengaturan> {
             ),
           ),
           Positioned(
-            top: width * 0.55,
+            top: width * 0.63,
             left: width * 0.8,
             child: _isShrink
                 ? SizedBox()
@@ -240,10 +265,12 @@ class _PengaturanState extends State<Pengaturan> {
                     child: CircleAvatar(
                       radius: 27,
                       backgroundColor: Colors.white,
-                      child: Icon(
-                        Icons.camera_alt_outlined,
+                      child: IconButton(
+                        icon: Icon(Icons.camera_alt_outlined),
                         color: Colors.grey.withOpacity(0.6),
-                        size: 30,
+                        onPressed: () {
+                          takePhoto(ImageSource.gallery);
+                        },
                       ),
                     ),
                   ),
