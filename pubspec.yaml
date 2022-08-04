@@ -39,6 +39,8 @@ dependencies:
   intl: ^0.17.0
   font_awesome_flutter: ^10.1.0
   http: ^0.13.4
+  image_picker: ^0.8.5+3
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:
