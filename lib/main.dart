@@ -1,4 +1,5 @@
 import 'package:clone_telegram/provider/theme.dart';
+import 'package:clone_telegram/provider/wr_provider.dart';
 import 'package:clone_telegram/screens/SplashScreen/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +20,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ThemeModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => QrController(),
+        ),
+        // Provider<ThemeModel>(
+        //   create: (_) => ThemeModel(),
+        // ),
+        ListenableProvider(create: (_) => ThemeModel()),
+      ],
       child: Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
           return MaterialApp(
@@ -34,5 +43,21 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
+
+    // return ChangeNotifierProvider(
+    //   create: (_) => ThemeModel(),
+    //   child: Consumer<ThemeModel>(
+    //     builder: (context, ThemeModel themeNotifier, child) {
+    //       return MaterialApp(
+    //         title: 'Telegram Clone',
+    //         theme: themeNotifier.isDark
+    //             ? ThemeData.dark()
+    //             : ThemeData(primarySwatch: Colors.blueGrey),
+    //         debugShowCheckedModeBanner: false,
+    //         home: SplashScreen(),
+    //       );
+    //     },
+    //   ),
+    // );
   }
 }
