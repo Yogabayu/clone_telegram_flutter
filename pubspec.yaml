@@ -41,6 +41,7 @@ dependencies:
   http: ^0.13.4
   image_picker: ^0.8.5+3
   qr_flutter: ^4.0.0
+  share_plus: ^4.0.10
 
 dev_dependencies:
   flutter_test:

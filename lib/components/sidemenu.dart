@@ -1,5 +1,6 @@
 import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:clone_telegram/provider/theme.dart';
+import 'package:clone_telegram/screens/grupBaru/grupBaru.dart';
 import 'package:clone_telegram/screens/kontak/contact.dart';
 import 'package:clone_telegram/screens/panggilan/panggilan.dart';
 import 'package:clone_telegram/screens/pengaturan/pengaturan.dart';
@@ -183,6 +184,12 @@ Widget _menuSide(IconData icon, String textMenu, context) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Panggilan()),
+          );
+        }
+        if (textMenu == 'Grup baru') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => GrupBaru()),
           );
         }
       },

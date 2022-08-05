@@ -1,8 +1,7 @@
 import 'dart:math';
-
+//TODO blm selssai
 import 'package:clone_telegram/provider/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class Contact extends StatefulWidget {
@@ -13,47 +12,37 @@ class Contact extends StatefulWidget {
 }
 
 class _ContactState extends State<Contact> {
-  ScrollController _scrollController =
-      new ScrollController(); // set controller on scrolling
+  ScrollController? _scrollController; // set controller on scrolling
   bool _show = true;
-
+  bool lastStatus = true;
+  double height = 200;
   Duration duration = Duration(milliseconds: 300);
+
+  void _scrollListener() {
+    if (_isShrink != lastStatus) {
+      setState(() {
+        lastStatus = _isShrink;
+      });
+    }
+  }
+
+  bool get _isShrink {
+    return _scrollController != null &&
+        _scrollController!.hasClients &&
+        _scrollController!.offset > (height - kToolbarHeight);
+  }
 
   @override
   void initState() {
     super.initState();
-    handleScroll();
+    _scrollController = ScrollController()..addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(() {});
+    _scrollController?.removeListener(_scrollListener);
+    _scrollController?.dispose();
     super.dispose();
-  }
-
-  void showFloationButton() {
-    setState(() {
-      _show = true;
-    });
-  }
-
-  void handleScroll() async {
-    _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
-        hideFloationButton();
-      }
-      if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.forward) {
-        showFloationButton();
-      }
-    });
-  }
-
-  void hideFloationButton() {
-    setState(() {
-      _show = false;
-    });
   }
 
   @override

@@ -1,7 +1,7 @@
 // ignore_for_file: unused_element
 
 import 'dart:io';
-import 'package:clone_telegram/components/qr.dart';
+import 'package:clone_telegram/screens/pengaturan/qr.dart';
 import 'package:clone_telegram/model/pengaturan.dart';
 import 'package:clone_telegram/provider/theme.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +90,7 @@ class _PengaturanState extends State<Pengaturan> {
                     title: _isShrink
                         ? Padding(
                             padding:
-                                EdgeInsets.only(top: width * 0.05, left: 0),
+                                EdgeInsets.only(top: width * 0.14, left: 0),
                             child: ListTile(
                               leading: CircleAvatar(
                                 backgroundImage: (file == null)
@@ -195,6 +195,13 @@ class _PengaturanState extends State<Pengaturan> {
                                   },
                                   icon: Icon(
                                     Icons.qr_code,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.search,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -462,10 +469,8 @@ Widget _pengaturan(context) {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
             ListView.builder(
+              padding: EdgeInsets.zero,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: dummyPengaturan.length,
