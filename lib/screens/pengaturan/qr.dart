@@ -1,6 +1,6 @@
 import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:clone_telegram/provider/theme.dart';
-import 'package:clone_telegram/provider/wr_provider.dart';
+import 'package:clone_telegram/provider/qr_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -14,6 +14,7 @@ class Qr extends StatefulWidget {
 }
 
 class _QrState extends State<Qr> {
+  int selectedCard = -1;
   @override
   Widget build(BuildContext context) {
     bool _isMoon = false;
@@ -64,9 +65,7 @@ class _QrState extends State<Qr> {
                     height: width * 0.8,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: themeNotifier.isDark
-                          ? Color.fromARGB(255, 29, 31, 31)
-                          : Colors.white,
+                      color: Colors.white,
                     ),
                     child: Column(
                       children: [
@@ -166,15 +165,92 @@ class _QrState extends State<Qr> {
                     Container(
                       width: width,
                       height: width * 0.2,
-                      child: ListView(
+                      child: ListView.builder(
+                        itemCount: carditems.length,
                         scrollDirection: Axis.horizontal,
-                        children: [
-                          _card(context, Icons.home, Colors.green),
-                          _card(context, Icons.home, Colors.red),
-                          _card(context, Icons.home, Colors.blue),
-                          _card(context, Icons.home, Colors.yellow),
-                          _card(context, Icons.home, Colors.amber),
-                        ],
+                        itemBuilder: (context, index) {
+                          final _cardItem = carditems[index];
+                          return Consumer<ThemeModel>(
+                            builder:
+                                (context, ThemeModel themeNotifier, child) {
+                              return Container(
+                                margin: EdgeInsets.only(right: 10),
+                                decoration: BoxDecoration(
+                                  color: themeNotifier.isDark
+                                      ? Color.fromARGB(255, 29, 31, 31)
+                                      : Colors.white,
+                                  border: Border.all(
+                                    color: selectedCard == index
+                                        ? Colors.blue
+                                        : Colors.white,
+                                    width: 3,
+                                  ),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                width: width * 0.17,
+                                height: width * 0.2,
+                                child: Center(
+                                  child: FractionallySizedBox(
+                                    heightFactor:
+                                        0.9, // Adjust those two for the white space
+                                    widthFactor: 0.9,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(themeNotifier.isDark
+                                              ? "assets/chat_bg_dark.jpg"
+                                              : "assets/chat_bg.jpg"),
+                                          fit: BoxFit.cover,
+                                          // colorFilter: ColorFilter.linearToSrgbGamma(),
+                                        ),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              Provider.of<QrController>(context,
+                                                      listen: false)
+                                                  .changeColor(
+                                                      _cardItem.warnaQr);
+                                              setState(() {
+                                                selectedCard = index;
+                                              });
+                                            },
+                                            child: Container(
+                                              margin:
+                                                  EdgeInsets.only(bottom: 10),
+                                              padding: EdgeInsets.all(1),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(2),
+                                              ),
+                                              child: QrImage(
+                                                padding: EdgeInsets.zero,
+                                                foregroundColor:
+                                                    _cardItem.warnaQr,
+                                                data: 'Telegram Clone by Yoga',
+                                                version: QrVersions.auto,
+                                                size: width * 0.06,
+                                                gapless: false,
+                                              ),
+                                            ),
+                                          ),
+                                          Icon(
+                                            _cardItem.iconCard,
+                                            size: 17,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ),
                     Container(
@@ -213,74 +289,35 @@ class _QrState extends State<Qr> {
   }
 }
 
-Widget _card(context, IconData iconCard, Color warnaQr) {
-  final double width = MediaQuery.of(context).size.width;
-  // final controllerQr = Provider.of<QrController>(context, listen: false);
-  return Consumer<ThemeModel>(
-    builder: (context, ThemeModel themeNotifier, child) {
-      return Container(
-        margin: EdgeInsets.only(right: 10),
-        decoration: BoxDecoration(
-          color: themeNotifier.isDark
-              ? Color.fromARGB(255, 29, 31, 31)
-              : Colors.white,
-          border: Border.all(
-            color: Colors.blue,
-            width: 3,
-          ),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        width: width * 0.17,
-        height: width * 0.2,
-        child: Center(
-          child: FractionallySizedBox(
-            heightFactor: 0.9, // Adjust those two for the white space
-            widthFactor: 0.9,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(themeNotifier.isDark
-                      ? "assets/chat_bg_dark.jpg"
-                      : "assets/chat_bg.jpg"),
-                  fit: BoxFit.cover,
-                  // colorFilter: ColorFilter.linearToSrgbGamma(),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Provider.of<QrController>(context, listen: false)
-                          .changeColor(warnaQr);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      padding: EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                      child: QrImage(
-                        padding: EdgeInsets.zero,
-                        foregroundColor: warnaQr,
-                        data: 'Telegram Clone by Yoga',
-                        version: QrVersions.auto,
-                        size: width * 0.06,
-                        gapless: false,
-                      ),
-                    ),
-                  ),
-                  Icon(
-                    iconCard,
-                    size: 17,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    },
-  );
+class CardQR {
+  final Color warnaQr;
+  final IconData iconCard;
+
+  CardQR({
+    required this.warnaQr,
+    required this.iconCard,
+  });
 }
+
+List<CardQR> carditems = [
+  CardQR(
+    warnaQr: Colors.green,
+    iconCard: Icons.home,
+  ),
+  CardQR(
+    warnaQr: Colors.red,
+    iconCard: Icons.android,
+  ),
+  CardQR(
+    warnaQr: Colors.blue,
+    iconCard: Icons.diamond,
+  ),
+  CardQR(
+    warnaQr: Colors.yellow,
+    iconCard: Icons.theater_comedy,
+  ),
+  CardQR(
+    warnaQr: Colors.orange,
+    iconCard: Icons.local_activity_rounded,
+  ),
+];

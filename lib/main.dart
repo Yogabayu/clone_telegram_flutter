@@ -1,5 +1,5 @@
 import 'package:clone_telegram/provider/theme.dart';
-import 'package:clone_telegram/provider/wr_provider.dart';
+import 'package:clone_telegram/provider/qr_provider.dart';
 import 'package:clone_telegram/screens/SplashScreen/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
