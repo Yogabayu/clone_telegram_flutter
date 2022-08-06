@@ -1,5 +1,5 @@
 // ignore_for_file: unused_element
-
+//TODO simplifikasi belum selesai
 import 'dart:io';
 import 'package:clone_telegram/screens/pengaturan/qr.dart';
 import 'package:clone_telegram/model/pengaturan.dart';
@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+final ImagePicker _picker = ImagePicker();
+File? file;
 
 class Pengaturan extends StatefulWidget {
   @override
@@ -19,9 +22,6 @@ class _PengaturanState extends State<Pengaturan> {
   bool lastStatus = true;
   double height = 200;
   final ImagePicker imagePicker = ImagePicker();
-
-  final ImagePicker _picker = ImagePicker();
-  File? file;
 
   Future<File?> takePhoto(ImageSource source) async {
     final XFile? image = await _picker.pickImage(source: source);
@@ -87,34 +87,7 @@ class _PengaturanState extends State<Pengaturan> {
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.parallax,
                     titlePadding: EdgeInsets.only(bottom: 15, left: 40),
-                    title: _isShrink
-                        ? Padding(
-                            padding:
-                                EdgeInsets.only(top: width * 0.14, left: 0),
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: (file == null)
-                                    ? NetworkImage(
-                                        'https://picsum.photos/seed/girl/200/300')
-                                    : FileImage(File(file!.path))
-                                        as ImageProvider,
-                              ),
-                              title: Text(
-                                "Saya Aslinya Ultraman",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "online",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          )
-                        : null,
+                    title: _isShrink ? _appUserPhoto(context) : null,
                     background: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -589,5 +562,33 @@ Widget _bantuan(context) {
         ),
       );
     },
+  );
+}
+
+//* Area Widget */
+Widget _appUserPhoto(context) {
+  final double width = MediaQuery.of(context).size.width;
+  return Padding(
+    padding: EdgeInsets.only(top: width * 0.14, left: 0),
+    child: ListTile(
+      leading: CircleAvatar(
+        backgroundImage: (file == null)
+            ? NetworkImage('https://picsum.photos/seed/girl/200/300')
+            : FileImage(File(file!.path)) as ImageProvider,
+      ),
+      title: Text(
+        "Saya Aslinya Ultraman",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      subtitle: Text(
+        "online",
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    ),
   );
 }
