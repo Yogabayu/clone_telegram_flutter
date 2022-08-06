@@ -1,5 +1,4 @@
 import 'dart:math';
-//TODO blm selssai
 import 'package:clone_telegram/provider/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,10 +11,10 @@ class Contact extends StatefulWidget {
 }
 
 class _ContactState extends State<Contact> {
-  ScrollController? _scrollController; // set controller on scrolling
-  bool _show = true;
+  ScrollController? _scrollController;
   bool lastStatus = true;
-  double height = 200;
+  double height = 200; // set controller on scrolling
+  bool _show = true;
   Duration duration = Duration(milliseconds: 300);
 
   void _scrollListener() {
@@ -87,11 +86,14 @@ class _ContactState extends State<Contact> {
           ),
           body: Container(
             child: RawScrollbar(
+              controller: _scrollController,
               thumbColor: Colors.grey,
               thickness: 6,
               thumbVisibility: true,
               child: ListView(
                 controller: _scrollController,
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
                 children: [
                   ListTile(
                     visualDensity: VisualDensity(horizontal: 0, vertical: 0),
