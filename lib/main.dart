@@ -25,9 +25,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => QrController(),
         ),
-        // Provider<ThemeModel>(
-        //   create: (_) => ThemeModel(),
-        // ),
         ListenableProvider(create: (_) => ThemeModel()),
       ],
       child: Consumer<ThemeModel>(

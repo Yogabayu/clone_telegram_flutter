@@ -1,5 +1,4 @@
 // ignore_for_file: unused_element
-//TODO simplifikasi belum selesai
 import 'dart:io';
 import 'package:clone_telegram/screens/pengaturan/qr.dart';
 import 'package:clone_telegram/model/pengaturan.dart';
