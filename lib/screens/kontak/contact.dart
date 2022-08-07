@@ -68,6 +68,9 @@ class _ContactState extends State<Contact> {
             ),
           ),
           appBar: AppBar(
+            backgroundColor: themeNotifier.isDark
+                ? Color.fromARGB(255, 91, 90, 90)
+                : Color.fromARGB(255, 70, 113, 148),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
