@@ -4,6 +4,7 @@ import 'package:clone_telegram/screens/grupBaru/grupBaru.dart';
 import 'package:clone_telegram/screens/kontak/contact.dart';
 import 'package:clone_telegram/screens/panggilan/panggilan.dart';
 import 'package:clone_telegram/screens/pengaturan/pengaturan.dart';
+import 'package:clone_telegram/screens/penggunaSekitar/penggunaSekitar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -190,6 +191,12 @@ Widget _menuSide(IconData icon, String textMenu, context) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => GrupBaru()),
+          );
+        }
+        if (textMenu == 'Pengguna Sekitar') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PenggunaSekitar()),
           );
         }
       },
