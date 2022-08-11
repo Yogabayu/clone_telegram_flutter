@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-//TODO undang teman
 class UndangTeman extends StatefulWidget {
   const UndangTeman({Key? key}) : super(key: key);
 

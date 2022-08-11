@@ -3,7 +3,6 @@ import 'package:clone_telegram/provider/theme.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class PilihNegara extends StatefulWidget {
   const PilihNegara({Key? key}) : super(key: key);
