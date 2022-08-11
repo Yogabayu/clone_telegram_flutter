@@ -1,14 +1,11 @@
 import 'dart:math';
 
-import 'package:clone_telegram/model/obrolan.dart';
 import 'package:clone_telegram/provider/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 
-//TODO pengguna sekitar belum selesai
 class PenggunaSekitar extends StatefulWidget {
   const PenggunaSekitar({Key? key}) : super(key: key);
 
@@ -18,8 +15,8 @@ class PenggunaSekitar extends StatefulWidget {
 
 class _PenggunaSekitarState extends State<PenggunaSekitar> {
   bool isShown = false;
-
   bool _isSee = false;
+  bool _isSeeGroup = false;
   void _cekLocation() async {
     LocationPermission permission;
     isShown = await Geolocator.isLocationServiceEnabled();
@@ -54,14 +51,12 @@ class _PenggunaSekitarState extends State<PenggunaSekitar> {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
-    double _width = width;
-    double _height = height * 0.4;
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Scaffold(
           body: Container(
-            width: double.infinity,
-            height: double.infinity,
+            width: width,
+            height: height,
             child: ListView(
               children: [
                 ListTile(
@@ -74,132 +69,7 @@ class _PenggunaSekitarState extends State<PenggunaSekitar> {
                 isShown
                     ? Container(
                         width: width,
-                        height: height,
-                        // child: Column(
-                        //   children: [
-                        //     Container(
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(50),
-                        //         color: Colors.blue,
-                        //       ),
-                        //       padding: EdgeInsets.all(10),
-                        //       height: width * 0.2,
-                        //       width: width * 0.2,
-                        //       child: ClipOval(
-                        //         child: Lottie.asset(
-                        //           "assets/pinMap.json",
-                        //           animate: true,
-                        //           alignment: Alignment.center,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       height: width * 0.08,
-                        //     ),
-                        //     Text(
-                        //       "Pengguna Sekitar",
-                        //       style: TextStyle(
-                        //         fontSize: 20,
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       height: width * 0.05,
-                        //     ),
-                        //     Container(
-                        //       margin: EdgeInsets.symmetric(horizontal: 40),
-                        //       child: Text(
-                        //         "Tukar info kontak dengan pengguna sekitar dan temukan teman baru.",
-                        //         textAlign: TextAlign.center,
-                        //         style: TextStyle(
-                        //           fontSize: 15,
-                        //           color: Colors.grey,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       height: width * 0.05,
-                        //     ),
-                        //     Divider(
-                        //       color: Colors.grey.withOpacity(0.3),
-                        //       thickness: 10,
-                        //     ),
-                        //     Container(
-                        //       width: double.infinity,
-                        //       height: isExpand ? 500 : 300,
-                        //       child: ListView(
-                        //         children: [
-                        //           Padding(
-                        //             padding: EdgeInsets.only(
-                        //               left: 15.0,
-                        //               top: 15,
-                        //               bottom: 5,
-                        //             ),
-                        //             child: Text(
-                        //               "Pengguna Sekitar",
-                        //               style: TextStyle(
-                        //                 color: Color.fromARGB(255, 75, 169, 247),
-                        //                 fontWeight: FontWeight.bold,
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           ListTile(
-                        //             leading: Icon(
-                        //               Icons.online_prediction_sharp,
-                        //               size: 27,
-                        //               color: Colors.blue,
-                        //             ),
-                        //             title: Container(
-                        //               padding: EdgeInsets.all(10),
-                        //               decoration: BoxDecoration(
-                        //                 border: Border(
-                        //                   bottom: BorderSide(
-                        //                       color:
-                        //                           Colors.grey.withOpacity(0.2)),
-                        //                 ),
-                        //               ),
-                        //               child: Text("Buat Saya Terluhat"),
-                        //             ),
-                        //             textColor: Colors.blue,
-                        //           ),
-                        //           Container(
-                        //             width: double.infinity,
-                        //             height: isExpand ? 500 : 300,
-                        //             child: ListView.builder(
-                        //               itemCount: dummyObrolan.length,
-                        //               itemBuilder: (context, index) {
-                        //                 final _items = dummyObrolan[index];
-                        //                 return ListTile(
-                        //                   leading: Container(
-                        //                     margin: EdgeInsets.symmetric(
-                        //                         vertical: 3, horizontal: 0),
-                        //                     width: 50,
-                        //                     height: 50,
-                        //                     child: CircleAvatar(
-                        //                       backgroundImage:
-                        //                           NetworkImage(_items.images),
-                        //                     ),
-                        //                   ),
-                        //                   title: Container(
-                        //                     padding: EdgeInsets.all(10),
-                        //                     decoration: BoxDecoration(
-                        //                       border: Border(
-                        //                         bottom: BorderSide(
-                        //                             color: Colors.grey
-                        //                                 .withOpacity(0.2)),
-                        //                       ),
-                        //                     ),
-                        //                     child: Text("Buat Saya Terluhat"),
-                        //                   ),
-                        //                   textColor: Colors.blue,
-                        //                 );
-                        //               },
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                        height: width * 1.65,
                         child: ListView(
                           shrinkWrap: true,
                           children: [
@@ -253,8 +123,8 @@ class _PenggunaSekitarState extends State<PenggunaSekitar> {
                               thickness: 10,
                             ),
                             AnimatedSize(
-                              duration: Duration(seconds: 1),
-                              curve: Curves.fastOutSlowIn,
+                              duration: Duration(milliseconds: 200),
+                              curve: Curves.easeIn,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -292,18 +162,93 @@ class _PenggunaSekitarState extends State<PenggunaSekitar> {
                                     ),
                                     textColor: Colors.blue,
                                   ),
-                                  _tile(),
-                                  _tile(),
-                                  _tile(),
-                                  TextButton(
-                                    onPressed: () {
+                                  _itemsTile(),
+                                  _itemsTile(),
+                                  _itemsTile(),
+                                  _isSee ? _hiddenTile() : SizedBox(),
+                                  ListTile(
+                                    onTap: () => setState(() {
+                                      _isSee = !_isSee;
+                                    }),
+                                    leading: Icon(
+                                      Icons.keyboard_arrow_down,
+                                      size: 27,
+                                      color: Colors.blue,
+                                    ),
+                                    title: Container(
+                                      padding: EdgeInsets.all(10),
+                                      child: Text("Tampilkan Lebih (95)"),
+                                    ),
+                                    textColor: Colors.blue,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey.withOpacity(0.3),
+                              thickness: 10,
+                            ),
+                            AnimatedSize(
+                              duration: Duration(milliseconds: 200),
+                              curve: Curves.easeIn,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 15.0,
+                                      top: 15,
+                                      bottom: 5,
+                                    ),
+                                    child: Text(
+                                      "Grup Sekitar",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 75, 169, 247),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    leading: Icon(
+                                      Icons.group_add_outlined,
+                                      size: 27,
+                                      color: Colors.blue,
+                                    ),
+                                    title: Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.2)),
+                                        ),
+                                      ),
+                                      child: Text("Buat Grup Lokal"),
+                                    ),
+                                    textColor: Colors.blue,
+                                  ),
+                                  _itemsTile(),
+                                  _itemsTile(),
+                                  _itemsTile(),
+                                  _isSeeGroup ? _hiddenTile() : SizedBox(),
+                                  ListTile(
+                                    onTap: () {
                                       setState(() {
-                                        _isSee = !_isSee;
+                                        _isSeeGroup = !_isSeeGroup;
                                       });
                                     },
-                                    child: Text("press here"),
+                                    leading: Icon(
+                                      Icons.keyboard_arrow_down,
+                                      size: 27,
+                                      color: Colors.blue,
+                                    ),
+                                    title: Container(
+                                      padding: EdgeInsets.all(10),
+                                      child: Text("Tampilkan Lebih (95)"),
+                                    ),
+                                    textColor: Colors.blue,
                                   ),
-                                  _isSee ? Text("data") : SizedBox(),
                                 ],
                               ),
                             ),
@@ -394,7 +339,20 @@ class _PenggunaSekitarState extends State<PenggunaSekitar> {
   }
 }
 
-Widget _tile() {
+Widget _hiddenTile() {
+  return Column(
+    children: [
+      _itemsTile(),
+      _itemsTile(),
+      _itemsTile(),
+      _itemsTile(),
+      _itemsTile(),
+      _itemsTile(),
+    ],
+  );
+}
+
+Widget _itemsTile() {
   var _random = Random();
   int random = _random.nextInt(10);
   return ListTile(

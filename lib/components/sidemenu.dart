@@ -5,6 +5,7 @@ import 'package:clone_telegram/screens/kontak/contact.dart';
 import 'package:clone_telegram/screens/panggilan/panggilan.dart';
 import 'package:clone_telegram/screens/pengaturan/pengaturan.dart';
 import 'package:clone_telegram/screens/penggunaSekitar/penggunaSekitar.dart';
+import 'package:clone_telegram/screens/pesanTersimpan/pesanTersimpan.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -197,6 +198,12 @@ Widget _menuSide(IconData icon, String textMenu, context) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => PenggunaSekitar()),
+          );
+        }
+        if (textMenu == 'Pesan Tersimpan') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PesanTersimpan()),
           );
         }
       },
