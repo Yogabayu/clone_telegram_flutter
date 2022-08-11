@@ -1,17 +1,18 @@
+import 'package:clone_telegram/provider/negara.dart';
 import 'package:clone_telegram/provider/theme.dart';
+import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-//TODO undang teman
-class UndangTeman extends StatefulWidget {
-  const UndangTeman({Key? key}) : super(key: key);
+class PilihNegara extends StatefulWidget {
+  const PilihNegara({Key? key}) : super(key: key);
 
   @override
-  _UndangTemanState createState() => _UndangTemanState();
+  _PilihNegaraState createState() => _PilihNegaraState();
 }
 
-class _UndangTemanState extends State<UndangTeman> {
+class _PilihNegaraState extends State<PilihNegara> {
   late TextEditingController _controller;
   ScrollController? _scrollController;
   bool lastStatus = true;
@@ -19,59 +20,29 @@ class _UndangTemanState extends State<UndangTeman> {
 
   final List<Map<String, dynamic>> _allDatas = [
     {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Bagikan Telegram",
-      "status": ""
+      "image": "ID",
+      "name": "Indonesia",
+      "no": "+62",
     },
     {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Andy",
-      "status": "terlihat seminggu yang lalu"
+      "image": "MT",
+      "name": "Malaysia",
+      "no": "+xx",
     },
     {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Aragon",
-      "status": "terlihat 23 Apr pada 14:04"
+      "image": "LS",
+      "name": "Laos",
+      "no": "+xx",
     },
     {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Bob",
-      "status": "terlihat sejuta tahun yang lalu"
+      "image": "FP",
+      "name": "Filipina",
+      "no": "+xx",
     },
     {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Barbara",
-      "status": "tidak terlihat"
-    },
-    {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Candy",
-      "status": "ya ndaktau kok tanya saya"
-    },
-    {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Colin",
-      "status": "terlihat seminggu yang lalu"
-    },
-    {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Audra",
-      "status": "terlihat seminggu yang lalu"
-    },
-    {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Banana",
-      "statuas": "terlihat seminggu yang lalu"
-    },
-    {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Caversky",
-      "status": "terlihat seminggu yang lalu"
-    },
-    {
-      "image": "https://picsum.photos/200/300?random=",
-      "name": "Becky",
-      "status": "terlihat seminggu yang lalu"
+      "image": "xxx",
+      "name": "isi Sendiri capek gua",
+      "no": "+xx",
     },
   ];
 
@@ -120,6 +91,8 @@ class _UndangTemanState extends State<UndangTeman> {
     super.dispose();
   }
 
+  bool _isChange = false;
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -127,54 +100,52 @@ class _UndangTemanState extends State<UndangTeman> {
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Scaffold(
-          bottomNavigationBar: Container(
-            color: Color.fromARGB(255, 71, 169, 75),
-            width: width,
-            height: width * 0.08,
-            child: Center(
-              child: Text(
-                "Pilih kontak untuk mengundang ke Telegram",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
           appBar: AppBar(
             backgroundColor: themeNotifier.isDark
                 ? Color.fromARGB(255, 91, 90, 90)
-                : Color.fromARGB(255, 70, 113, 148),
+                : Color.fromARGB(255, 243, 243, 243),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            title: Text(
-              "Undang Teman",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: width * 0.05,
-              ),
-            ),
+            title: _isChange
+                ? TextField(
+                    controller: _controller,
+                    onChanged: (value) => _runFilter(value),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 20),
+                      hintText: 'Cari Kontak',
+                    ),
+                  )
+                : Text(
+                    "Undang Teman",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: width * 0.05,
+                    ),
+                  ),
+            actions: [
+              _isChange
+                  ? SizedBox()
+                  : IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _isChange = true;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                    ),
+            ],
           ),
           body: Container(
             width: width,
             height: height,
             child: Column(
               children: [
-                TextField(
-                  controller: _controller,
-                  onChanged: (value) => _runFilter(value),
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(left: 20),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(93, 255, 255, 255),
-                      ),
-                    ),
-                    hintText: 'Cari Kontak',
-                  ),
-                ),
                 Expanded(
                   child: _foundData.isNotEmpty
                       ? RawScrollbar(
@@ -186,32 +157,23 @@ class _UndangTemanState extends State<UndangTeman> {
                             itemCount: _foundData.length,
                             itemBuilder: (_, index) {
                               final _datas = _foundData[index];
-                              if (index == 0) {
-                                return ListTile(
-                                  onTap: () => Share.share(
-                                      'Telegram Clone by Yoga Bayu Anggana Pratama'),
-                                  leading: Container(
-                                    height: 50,
-                                    width: 50,
-                                    child: ClipOval(
-                                      child: Icon(
-                                        Icons.share,
-                                      ),
-                                    ),
-                                  ),
-                                  title: Text(
-                                    "Bagikan Telegram",
-                                  ),
-                                );
-                              } else {}
                               return ListTile(
+                                onTap: () {
+                                  Provider.of<NegaraProvider>(context,
+                                          listen: false)
+                                      .changeNegara(_datas["image"],
+                                          _datas["name"], _datas["no"]);
+                                  Navigator.of(context).pop();
+                                },
                                 leading: Container(
-                                  height: 50,
-                                  width: 50,
+                                  height: 20,
+                                  width: 20,
                                   child: ClipOval(
-                                    child: Image.network(
-                                      _datas["image"] + "${index}",
-                                      fit: BoxFit.fill,
+                                    child: Flag.fromCode(
+                                      _datas["image"] == 'ID' ||
+                                              _datas["image"] == 'id'
+                                          ? FlagsCode.ID
+                                          : FlagsCode.RU,
                                     ),
                                   ),
                                 ),
@@ -221,7 +183,12 @@ class _UndangTemanState extends State<UndangTeman> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                subtitle: Text(_datas["status"].toString()),
+                                trailing: Text(
+                                  _datas["no"].toString(),
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                  ),
+                                ),
                               );
                             },
                           ),

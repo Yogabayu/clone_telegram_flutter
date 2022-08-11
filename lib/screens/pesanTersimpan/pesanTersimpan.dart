@@ -16,6 +16,7 @@ class _PesanTersimpanState extends State<PesanTersimpan> {
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Scaffold(
+          // resizeToAvoidBottomInset: false,
           appBar: AppBar(
             titleSpacing: 0,
             backgroundColor: themeNotifier.isDark
@@ -179,78 +180,72 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Container(
-          // margin: const EdgeInsets.symmetric(
-          //   horizontal: 8.0,
-          // ),
           child: Row(
             children: [
               Flexible(
-                child: Container(
-                  height: 50,
-                  child: TextField(
-                    controller: _textController,
-                    onChanged: (text) {
-                      setState(() {
-                        sendMic = true;
-                      });
-                    },
-                    onSubmitted: _handleSubmitted,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.zero,
-                      border: OutlineInputBorder(
-                        // borderRadius: BorderRadius.circular(25.7),
-                        borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
+                child: TextField(
+                  controller: _textController,
+                  onChanged: (text) {
+                    setState(() {
+                      sendMic = true;
+                    });
+                  },
+                  onSubmitted: _handleSubmitted,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.zero,
+                    border: OutlineInputBorder(
+                      // borderRadius: BorderRadius.circular(25.7),
+                      borderSide: const BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
                       ),
-                      filled: true,
-                      fillColor:
-                          themeNotifier.isDark ? Colors.black : Colors.white,
-                      prefixIcon: const Icon(
-                        Icons.emoji_emotions_outlined,
-                        color: Colors.grey,
-                      ),
-                      hintText: 'Pesan',
-                      hintStyle:
-                          const TextStyle(fontSize: 20, color: Colors.grey),
-                      suffixIconConstraints:
-                          const BoxConstraints(minWidth: 80, maxWidth: 100),
-                      suffixIcon: _textController.text == ''
-                          ? Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.attach_file_outlined,
-                                  color: Colors.grey,
-                                ),
-                                SizedBox(
-                                  width: 16,
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.mic_none_outlined,
-                                  ),
-                                  onPressed: () => // MODIFIED
-                                      _handleSubmitted(
-                                          _textController.text) // MODIFIED
-                                  ,
-                                ),
-                              ],
-                            )
-                          : IconButton(
-                              icon: Icon(
-                                Icons.send,
-                                color: Colors.blue,
-                              ),
-                              onPressed: () => // MODIFIED
-                                  _handleSubmitted(
-                                      _textController.text) // MODIFIED
-                              ,
-                            ),
                     ),
-                    focusNode: _focusNode,
+                    filled: true,
+                    fillColor:
+                        themeNotifier.isDark ? Colors.black : Colors.white,
+                    prefixIcon: const Icon(
+                      Icons.emoji_emotions_outlined,
+                      color: Colors.grey,
+                    ),
+                    hintText: 'Pesan',
+                    hintStyle:
+                        const TextStyle(fontSize: 20, color: Colors.grey),
+                    suffixIconConstraints:
+                        const BoxConstraints(minWidth: 80, maxWidth: 100),
+                    suffixIcon: _textController.text == ''
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.attach_file_outlined,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.mic_none_outlined,
+                                ),
+                                onPressed: () => // MODIFIED
+                                    _handleSubmitted(
+                                        _textController.text) // MODIFIED
+                                ,
+                              ),
+                            ],
+                          )
+                        : IconButton(
+                            icon: Icon(
+                              Icons.send,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () => // MODIFIED
+                                _handleSubmitted(
+                                    _textController.text) // MODIFIED
+                            ,
+                          ),
                   ),
+                  focusNode: _focusNode,
                 ),
               ),
             ],
@@ -272,7 +267,7 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return Container(
-        constraints: BoxConstraints.expand(),
+        // constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(themeNotifier.isDark
@@ -284,109 +279,113 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
         child: Column(
           children: [
             _messages.isEmpty
-                ? Container(
-                    margin: EdgeInsets.only(top: height * 0.24),
-                    width: width * 0.65,
-                    height: width * 0.9,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.25),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: [
-                        SizedBox(
-                          height: width * 0.05,
-                        ),
-                        SizedBox(
-                          child: Image.network(
-                              "https://www.gambaranimasi.org/data/media/481/animasi-bergerak-bebek-itik-0113.gif"),
-                          height: width * 0.2,
-                        ),
-                        SizedBox(
-                          height: width * 0.03,
-                        ),
-                        Text(
-                          "Penyimpanan Awan Anda",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: width * 0.03,
+                ? Flexible(
+                    fit: FlexFit.tight,
+                    flex: 9,
+                    child: Container(
+                      margin: EdgeInsets.only(top: height * 0.24),
+                      width: width * 0.65,
+                      height: width * 0.9,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.25),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: [
+                          SizedBox(
+                            height: width * 0.05,
                           ),
-                        ),
-                        SizedBox(
-                          height: width * 0.03,
-                        ),
-                        ListTile(
-                          leading: Text(
-                            "\u2022 ",
+                          SizedBox(
+                            child: Image.network(
+                                "https://www.gambaranimasi.org/data/media/481/animasi-bergerak-bebek-itik-0113.gif"),
+                            height: width * 0.2,
+                          ),
+                          SizedBox(
+                            height: width * 0.03,
+                          ),
+                          Text(
+                            "Penyimpanan Awan Anda",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: width * 0.07,
+                              fontWeight: FontWeight.bold,
+                              fontSize: width * 0.03,
                             ),
                           ),
-                          title: Transform.translate(
-                            offset: Offset(-25, 0),
-                            child: Text(
-                              "Teruskan Pesan Kesini Untuk Menyimpan",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
+                          SizedBox(
+                            height: width * 0.03,
+                          ),
+                          ListTile(
+                            leading: Text(
+                              "\u2022 ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: width * 0.07,
+                              ),
+                            ),
+                            title: Transform.translate(
+                              offset: Offset(-25, 0),
+                              child: Text(
+                                "Teruskan Pesan Kesini Untuk Menyimpan",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
                             ),
                           ),
-                        ),
-                        ListTile(
-                          leading: Text(
-                            "\u2022 ",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: width * 0.07,
+                          ListTile(
+                            leading: Text(
+                              "\u2022 ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: width * 0.07,
+                              ),
+                            ),
+                            title: Transform.translate(
+                              offset: Offset(-25, 0),
+                              child: Text(
+                                "Kirim media dan berkas kesini untuk menyimpan",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
                             ),
                           ),
-                          title: Transform.translate(
-                            offset: Offset(-25, 0),
-                            child: Text(
-                              "Kirim media dan berkas kesini untuk menyimpan",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
+                          ListTile(
+                            leading: Text(
+                              "\u2022 ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: width * 0.07,
+                              ),
+                            ),
+                            title: Transform.translate(
+                              offset: Offset(-25, 0),
+                              child: Text(
+                                "Akses obrolan dari perangkat apapun",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
                             ),
                           ),
-                        ),
-                        ListTile(
-                          leading: Text(
-                            "\u2022 ",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: width * 0.07,
+                          ListTile(
+                            leading: Text(
+                              "\u2022 ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: width * 0.07,
+                              ),
+                            ),
+                            title: Transform.translate(
+                              offset: Offset(-25, 0),
+                              child: Text(
+                                "Gunakan Cari untuk menemukan sesuatu",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
                             ),
                           ),
-                          title: Transform.translate(
-                            offset: Offset(-25, 0),
-                            child: Text(
-                              "Akses obrolan dari perangkat apapun",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
-                            ),
-                          ),
-                        ),
-                        ListTile(
-                          leading: Text(
-                            "\u2022 ",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: width * 0.07,
-                            ),
-                          ),
-                          title: Transform.translate(
-                            offset: Offset(-25, 0),
-                            child: Text(
-                              "Gunakan Cari untuk menemukan sesuatu",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   )
                 : Text(""),

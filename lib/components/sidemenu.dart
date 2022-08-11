@@ -6,6 +6,7 @@ import 'package:clone_telegram/screens/panggilan/panggilan.dart';
 import 'package:clone_telegram/screens/pengaturan/pengaturan.dart';
 import 'package:clone_telegram/screens/penggunaSekitar/penggunaSekitar.dart';
 import 'package:clone_telegram/screens/pesanTersimpan/pesanTersimpan.dart';
+import 'package:clone_telegram/screens/tambahAkun/tambahAkun.dart';
 import 'package:clone_telegram/screens/undangTeman/undangTeman.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,11 @@ class _SideMenuState extends State<SideMenu> {
                         margin: EdgeInsets.zero,
                         child: ListTile(
                           onTap: () {
-                            print("Tambah akun");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TambahAkun()),
+                            );
                           },
                           leading: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +114,7 @@ class _SideMenuState extends State<SideMenu> {
                 // ),
                 Positioned(
                   right: width * 0.04,
-                  top: width * 0.1,
+                  top: width * 0.18,
                   child: AnimatedIconButton(
                     size: 23,
                     onPressed: () {
@@ -135,7 +140,7 @@ class _SideMenuState extends State<SideMenu> {
                 ),
                 Positioned(
                   right: width * 0.03,
-                  top: width * 0.33,
+                  top: width * 0.4,
                   child: AnimatedIconButton(
                     size: 30,
                     onPressed: () {

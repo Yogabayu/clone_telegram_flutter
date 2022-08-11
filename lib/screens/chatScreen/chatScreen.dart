@@ -590,43 +590,49 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
         child: Column(
           children: [
             _messages.isEmpty
-                ? Container(
-                    margin: EdgeInsets.only(top: height * 0.24),
-                    width: width * 0.65,
-                    height: width * 0.5,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.34),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: [
-                        SizedBox(
-                          height: width * 0.05,
-                        ),
-                        Text(
-                          "Belum ada pesan di sini...",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: width * 0.07,
-                        ),
-                        Text(
-                          "Kirim pesan dan tekan sambutan di \nbawah.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: width * 0.01,
-                        ),
-                        SizedBox(
-                          child: Image.asset("assets/hi.gif"),
-                          height: width * 0.2,
-                        ),
-                      ],
+                ? Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Container(
+                      margin: EdgeInsets.only(top: height * 0.24),
+                      width: width * 0.65,
+                      height: width * 0.5,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.34),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: [
+                          SizedBox(
+                            height: width * 0.05,
+                          ),
+                          Text(
+                            "Belum ada pesan di sini...",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: width * 0.07,
+                          ),
+                          Text(
+                            "Kirim pesan dan tekan sambutan di \nbawah.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: width * 0.01,
+                          ),
+                          SizedBox(
+                            child: Image.asset("assets/hi.gif"),
+                            height: width * 0.2,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 : Text(""),
