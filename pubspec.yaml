@@ -45,6 +45,7 @@ dependencies:
   permission_handler: ^10.0.0
   lottie: ^1.4.1
   geolocator: ^9.0.1
+  flag: ^6.0.0
 
 dev_dependencies:
   flutter_test:

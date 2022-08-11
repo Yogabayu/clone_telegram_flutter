@@ -566,7 +566,7 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     );
   }
 
-// ↓ hold tap position, set during onTapDown, using getPosition() method
+  // ↓ hold tap position, set during onTapDown, using getPosition() method
   Offset? tapXY;
   // ↓ hold screen size, using first line in build() method
   RenderBox? overlay;
@@ -580,60 +580,59 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
       return Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage(themeNotifier.isDark
-              ? "assets/chat_bg_dark.jpg"
-              : "assets/chat_bg.jpg"),
-          fit: BoxFit.cover,
-          // colorFilter: ColorFilter.linearToSrgbGamma(),
-        )
-            // image: DecorationImage(
-            //   image:  AssetImage("assets/chat_bg.jpg"),
-            //   fit: BoxFit.cover,
-            //   colorFilter: ColorFilter.linearToSrgbGamma(),
-            // ),
-            ),
+          image: DecorationImage(
+            image: AssetImage(themeNotifier.isDark
+                ? "assets/chat_bg_dark.jpg"
+                : "assets/chat_bg.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
-          // MODIFIED
           children: [
             _messages.isEmpty
-                ? Container(
-                    margin: EdgeInsets.only(top: height * 0.24),
-                    width: width * 0.65,
-                    height: width * 0.5,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.34),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: [
-                        SizedBox(
-                          height: width * 0.05,
-                        ),
-                        Text(
-                          "Belum ada pesan di sini...",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: width * 0.07,
-                        ),
-                        Text(
-                          "Kirim pesan dan tekan sambutan di \nbawah.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: width * 0.01,
-                        ),
-                        SizedBox(
-                          child: Image.asset("assets/hi.gif"),
-                          height: width * 0.2,
-                        ),
-                      ],
+                ? Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Container(
+                      margin: EdgeInsets.only(top: height * 0.24),
+                      width: width * 0.65,
+                      height: width * 0.5,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.34),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: [
+                          SizedBox(
+                            height: width * 0.05,
+                          ),
+                          Text(
+                            "Belum ada pesan di sini...",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: width * 0.07,
+                          ),
+                          Text(
+                            "Kirim pesan dan tekan sambutan di \nbawah.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: width * 0.01,
+                          ),
+                          SizedBox(
+                            child: Image.asset("assets/hi.gif"),
+                            height: width * 0.2,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 : Text(""),

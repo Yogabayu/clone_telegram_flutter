@@ -1,3 +1,4 @@
+import 'package:clone_telegram/provider/negara.dart';
 import 'package:clone_telegram/provider/theme.dart';
 import 'package:clone_telegram/provider/qr_provider.dart';
 import 'package:clone_telegram/screens/SplashScreen/splashScreen.dart';
@@ -9,6 +10,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeModel()),
+        ChangeNotifierProvider(create: (context) => NegaraProvider()),
       ],
       child: const MyApp(),
     ),
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => QrController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NegaraProvider(),
         ),
         ListenableProvider(create: (_) => ThemeModel()),
       ],
