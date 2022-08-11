@@ -6,6 +6,7 @@ import 'package:clone_telegram/screens/panggilan/panggilan.dart';
 import 'package:clone_telegram/screens/pengaturan/pengaturan.dart';
 import 'package:clone_telegram/screens/penggunaSekitar/penggunaSekitar.dart';
 import 'package:clone_telegram/screens/pesanTersimpan/pesanTersimpan.dart';
+import 'package:clone_telegram/screens/undangTeman/undangTeman.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -74,8 +75,8 @@ class _SideMenuState extends State<SideMenu> {
                       Divider(
                         color: Colors.black.withOpacity(0.1),
                       ),
-                      _menuSide(Icons.person_add_outlined, 'Pesan Tersimpan',
-                          context),
+                      _menuSide(
+                          Icons.person_add_outlined, 'Undang Teman', context),
                       _menuSide(Icons.question_mark_outlined, 'Fitur Telegram',
                           context),
                     ],
@@ -204,6 +205,12 @@ Widget _menuSide(IconData icon, String textMenu, context) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => PesanTersimpan()),
+          );
+        }
+        if (textMenu == 'Undang Teman') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => UndangTeman()),
           );
         }
       },

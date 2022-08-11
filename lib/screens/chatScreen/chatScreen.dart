@@ -566,7 +566,7 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     );
   }
 
-// ↓ hold tap position, set during onTapDown, using getPosition() method
+  // ↓ hold tap position, set during onTapDown, using getPosition() method
   Offset? tapXY;
   // ↓ hold screen size, using first line in build() method
   RenderBox? overlay;
@@ -580,21 +580,14 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
       return Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage(themeNotifier.isDark
-              ? "assets/chat_bg_dark.jpg"
-              : "assets/chat_bg.jpg"),
-          fit: BoxFit.cover,
-          // colorFilter: ColorFilter.linearToSrgbGamma(),
-        )
-            // image: DecorationImage(
-            //   image:  AssetImage("assets/chat_bg.jpg"),
-            //   fit: BoxFit.cover,
-            //   colorFilter: ColorFilter.linearToSrgbGamma(),
-            // ),
-            ),
+          image: DecorationImage(
+            image: AssetImage(themeNotifier.isDark
+                ? "assets/chat_bg_dark.jpg"
+                : "assets/chat_bg.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
-          // MODIFIED
           children: [
             _messages.isEmpty
                 ? Container(
