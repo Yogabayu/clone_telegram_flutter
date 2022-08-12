@@ -87,10 +87,7 @@ class _SideMenuState extends State<SideMenu> {
                     ],
                   ),
                 ),
-                // IgnorePointer(
-                //   child:
                 ListView(
-                  // Remove padding
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
                   children: [
@@ -111,10 +108,9 @@ class _SideMenuState extends State<SideMenu> {
                     ),
                   ],
                 ),
-                // ),
                 Positioned(
                   right: width * 0.04,
-                  top: width * 0.18,
+                  top: width * 0.1,
                   child: AnimatedIconButton(
                     size: 23,
                     onPressed: () {
@@ -140,7 +136,7 @@ class _SideMenuState extends State<SideMenu> {
                 ),
                 Positioned(
                   right: width * 0.03,
-                  top: width * 0.4,
+                  top: width * 0.3,
                   child: AnimatedIconButton(
                     size: 30,
                     onPressed: () {
