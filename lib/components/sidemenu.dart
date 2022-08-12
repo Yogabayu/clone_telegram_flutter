@@ -48,7 +48,8 @@ class _SideMenuState extends State<SideMenu> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => TambahAkun()),
+                                builder: (context) => TambahAkun(),
+                              ),
                             );
                           },
                           leading: Column(
@@ -57,7 +58,6 @@ class _SideMenuState extends State<SideMenu> {
                               Icon(
                                 Icons.add,
                                 color: Colors.grey,
-                                //size: 30,
                               ),
                             ],
                           ),
@@ -87,10 +87,7 @@ class _SideMenuState extends State<SideMenu> {
                     ],
                   ),
                 ),
-                // IgnorePointer(
-                //   child:
                 ListView(
-                  // Remove padding
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
                   children: [
@@ -111,56 +108,59 @@ class _SideMenuState extends State<SideMenu> {
                     ),
                   ],
                 ),
-                // ),
-                Positioned(
-                  right: width * 0.04,
-                  top: width * 0.18,
-                  child: AnimatedIconButton(
-                    size: 23,
-                    onPressed: () {
-                      setState(() {
-                        _isMoon = !_isMoon;
-                      });
-                      themeNotifier.isDark
-                          ? themeNotifier.isDark = false
-                          : themeNotifier.isDark = true;
-                    },
-                    duration: const Duration(milliseconds: 500),
-                    splashColor: Colors.transparent,
-                    icons: const <AnimatedIconItem>[
-                      AnimatedIconItem(
-                        icon: Icon(Icons.sunny, color: Colors.white),
-                      ),
-                      AnimatedIconItem(
-                        icon:
-                            Icon(Icons.mode_night_rounded, color: Colors.white),
-                      ),
-                    ],
+                Align(
+                  alignment: Alignment(1, -0.85),
+                  child: FractionallySizedBox(
+                    widthFactor: .3,
+                    child: AnimatedIconButton(
+                      size: 23,
+                      onPressed: () {
+                        setState(() {
+                          _isMoon = !_isMoon;
+                        });
+                        themeNotifier.isDark
+                            ? themeNotifier.isDark = false
+                            : themeNotifier.isDark = true;
+                      },
+                      duration: const Duration(milliseconds: 500),
+                      splashColor: Colors.transparent,
+                      icons: const <AnimatedIconItem>[
+                        AnimatedIconItem(
+                          icon: Icon(Icons.sunny, color: Colors.white),
+                        ),
+                        AnimatedIconItem(
+                          icon: Icon(Icons.mode_night_rounded,
+                              color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                Positioned(
-                  right: width * 0.03,
-                  top: width * 0.4,
-                  child: AnimatedIconButton(
-                    size: 30,
-                    onPressed: () {
-                      setState(() {
-                        selected = !selected;
-                        print(selected);
-                      });
-                    },
-                    duration: const Duration(milliseconds: 500),
-                    splashColor: Colors.transparent,
-                    icons: const <AnimatedIconItem>[
-                      AnimatedIconItem(
-                        icon: Icon(Icons.keyboard_arrow_down,
-                            color: Colors.white),
-                      ),
-                      AnimatedIconItem(
-                        icon:
-                            Icon(Icons.keyboard_arrow_up, color: Colors.white),
-                      ),
-                    ],
+                Align(
+                  alignment: Alignment(1, -0.65),
+                  child: FractionallySizedBox(
+                    widthFactor: .3,
+                    child: AnimatedIconButton(
+                      size: 30,
+                      onPressed: () {
+                        setState(() {
+                          selected = !selected;
+                          print(selected);
+                        });
+                      },
+                      duration: const Duration(milliseconds: 500),
+                      splashColor: Colors.transparent,
+                      icons: const <AnimatedIconItem>[
+                        AnimatedIconItem(
+                          icon: Icon(Icons.keyboard_arrow_down,
+                              color: Colors.white),
+                        ),
+                        AnimatedIconItem(
+                          icon: Icon(Icons.keyboard_arrow_up,
+                              color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

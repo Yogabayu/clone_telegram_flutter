@@ -29,17 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   onPressed: () {},
-        //   icon: const Icon(Icons.menu),
-        // ),
         title: Text("Telegram"),
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {},
-        //     icon: const Icon(Icons.search),
-        //   ),
-        // ],
       ),
     );
   }

@@ -45,21 +45,5 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
-
-    // return ChangeNotifierProvider(
-    //   create: (_) => ThemeModel(),
-    //   child: Consumer<ThemeModel>(
-    //     builder: (context, ThemeModel themeNotifier, child) {
-    //       return MaterialApp(
-    //         title: 'Telegram Clone',
-    //         theme: themeNotifier.isDark
-    //             ? ThemeData.dark()
-    //             : ThemeData(primarySwatch: Colors.blueGrey),
-    //         debugShowCheckedModeBanner: false,
-    //         home: SplashScreen(),
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }

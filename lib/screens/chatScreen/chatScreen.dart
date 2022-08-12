@@ -485,9 +485,6 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Container(
-          // margin: const EdgeInsets.symmetric(
-          //   horizontal: 8.0,
-          // ),
           child: Row(
             children: [
               Flexible(
@@ -504,7 +501,6 @@ class _ChatScrState extends State<ChatScr> with TickerProviderStateMixin {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       border: OutlineInputBorder(
-                        // borderRadius: BorderRadius.circular(25.7),
                         borderSide: const BorderSide(
                           width: 0,
                           style: BorderStyle.none,

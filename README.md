@@ -1,16 +1,23 @@
-# clone_telegram
+# Telegram Clone
 
-A new Flutter project.
+Building Telegram Clone With Flutter.
 
-## Getting Started
+## Demo
 
-This project is a starting point for a Flutter application.
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
+Instal Project ini dengan git
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+  git clone https://github.com/Yogabayu/clone_telegram.git
+  cd telegram_clone
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Authors
+
+- Github: [@Yogabayu](https://github.com/Yogabayu)
+- Instagram: [@yogabayu.ap](https://www.instagram.com/yogabayu.ap/)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

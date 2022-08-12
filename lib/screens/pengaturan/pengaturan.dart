@@ -225,39 +225,68 @@ class _PengaturanState extends State<Pengaturan> {
               ),
             ),
           ),
-          Positioned(
-            top: width * 0.63,
-            left: width * 0.8,
-            child: _isShrink
-                ? SizedBox()
-                : Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(width * 0.8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 0.1,
-                          offset: Offset(0, 3),
+          Align(
+            alignment: Alignment(1, -0.4),
+            child: FractionallySizedBox(
+              widthFactor: .3,
+              child: _isShrink
+                  ? SizedBox()
+                  : Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(width * 0.8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            blurRadius: 27,
+                            offset: Offset(1, 1),
+                          ),
+                        ],
+                      ),
+                      child: CircleAvatar(
+                        radius: 27,
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                          icon: Icon(Icons.add_a_photo_outlined),
+                          color: Colors.grey.withOpacity(0.6),
+                          onPressed: () {
+                            takePhoto(ImageSource.gallery);
+                          },
                         ),
-                      ],
-                    ),
-                    child: CircleAvatar(
-                      radius: 27,
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        icon: Icon(Icons.camera_alt_outlined),
-                        color: Colors.grey.withOpacity(0.6),
-                        onPressed: () {
-                          takePhoto(ImageSource.gallery);
-                        },
                       ),
                     ),
-                  ),
+            ),
           ),
         ],
       ),
     );
   }
+}
+
+//* Area Widget */
+Widget _appUserPhoto(context) {
+  return Padding(
+    padding: EdgeInsets.all(15),
+    child: ListTile(
+      leading: CircleAvatar(
+        backgroundImage: (file == null)
+            ? NetworkImage('https://picsum.photos/seed/girl/200/300')
+            : FileImage(File(file!.path)) as ImageProvider,
+      ),
+      title: Text(
+        "Saya Aslinya Ultraman",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      subtitle: Text(
+        "online",
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    ),
+  );
 }
 
 Widget _akun(context) {
@@ -561,33 +590,5 @@ Widget _bantuan(context) {
         ),
       );
     },
-  );
-}
-
-//* Area Widget */
-Widget _appUserPhoto(context) {
-  final double width = MediaQuery.of(context).size.width;
-  return Padding(
-    padding: EdgeInsets.only(top: width * 0.14, left: 0),
-    child: ListTile(
-      leading: CircleAvatar(
-        backgroundImage: (file == null)
-            ? NetworkImage('https://picsum.photos/seed/girl/200/300')
-            : FileImage(File(file!.path)) as ImageProvider,
-      ),
-      title: Text(
-        "Saya Aslinya Ultraman",
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      subtitle: Text(
-        "online",
-        style: TextStyle(
-          color: Colors.white,
-        ),
-      ),
-    ),
   );
 }

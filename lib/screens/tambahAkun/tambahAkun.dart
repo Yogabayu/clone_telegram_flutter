@@ -13,6 +13,16 @@ class TambahAkun extends StatefulWidget {
 }
 
 class _TambahAkunState extends State<TambahAkun> {
+  final negaraController = TextEditingController();
+  final kodeController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    negaraController.dispose();
+    kodeController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final String _negara = Provider.of<NegaraProvider>(context).negara;
@@ -20,6 +30,9 @@ class _TambahAkunState extends State<TambahAkun> {
     final String _kode = Provider.of<NegaraProvider>(context).kode;
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
+
+    negaraController.text = "  " + _negara;
+    kodeController.text = _kode + "    | ";
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Scaffold(
@@ -50,7 +63,6 @@ class _TambahAkunState extends State<TambahAkun> {
                     right: width * 0.1,
                   ),
                   width: double.infinity,
-                  // height: double.infinity,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -81,8 +93,7 @@ class _TambahAkunState extends State<TambahAkun> {
                           height: 30,
                         ),
                         TextField(
-                          controller:
-                              TextEditingController(text: "  " + _negara),
+                          controller: negaraController,
                           readOnly: true,
                           decoration: InputDecoration(
                             prefixIcon: Align(
@@ -115,8 +126,7 @@ class _TambahAkunState extends State<TambahAkun> {
                           height: 20,
                         ),
                         TextField(
-                          controller:
-                              TextEditingController(text: _kode + "    | "),
+                          controller: kodeController,
                           keyboardType: TextInputType.number,
                           // readOnly: true,
                           decoration: InputDecoration(
