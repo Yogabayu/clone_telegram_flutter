@@ -46,6 +46,12 @@ dependencies:
   lottie: ^1.4.1
   geolocator: ^9.0.1
   flag: ^6.0.0
+  flutter_launcher_icons: "^0.10.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/logo.png"
 
 dev_dependencies:
   flutter_test:
